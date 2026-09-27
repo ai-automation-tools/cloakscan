@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>CloakScan</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div id="cloakscan-popup" class="cloakscan-popup">
+    <header class="cs-header">
+      <span class="cs-mark" aria-hidden="true"></span>
+      <div>
+        <h1>CloakScan</h1>
+        <p class="cs-sub">Hidden-instruction scanner</p>
+      </div>
+    </header>
+
+    <button id="cs-scan-btn" class="cs-scan-btn" type="button">Scan this page</button>
+    <p id="cs-status" class="cs-status">Not scanned yet</p>
+
+    <p id="cs-summary" class="cs-summary"></p>
+    <ul id="cs-findings" class="cs-findings"></ul>
+
+    <button id="cs-copy-btn" class="cs-copy-btn" type="button" disabled>Copy visible-only text</button>
+    <p class="cs-footnote">Free: manual scans on the tab you're viewing. Pro: continuous scanning + agent-block mode.</p>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>

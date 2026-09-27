@@ -1,0 +1,173 @@
+.cloakscan-popup {
+  width: 360px;
+  box-sizing: border-box;
+  padding: 14px 16px 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #1c1e26;
+  background: #ffffff;
+}
+
+.cloakscan-popup * {
+  box-sizing: border-box;
+}
+
+.cs-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.cs-mark {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 9px;
+  background: linear-gradient(135deg, #1f2937, #0f766e 65%, #14b8a6);
+  position: relative;
+}
+
+.cs-mark::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 2px dashed rgba(255, 255, 255, 0.85);
+  border-radius: 6px;
+}
+
+.cs-header h1 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.cs-sub {
+  margin: 1px 0 0;
+  font-size: 11.5px;
+  color: #6b7280;
+}
+
+.cs-scan-btn {
+  width: 100%;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 8px;
+  background: #0f766e;
+  color: #f0fdfa;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cs-scan-btn:hover {
+  background: #0d6059;
+}
+
+.cs-scan-btn:disabled {
+  background: #99f6e4;
+  color: #134e4a;
+  cursor: progress;
+}
+
+.cs-status {
+  margin: 7px 0 4px;
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+.cs-summary {
+  margin: 8px 0 6px;
+  padding: 6px 10px;
+  border-radius: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.cs-summary.clear {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.cs-summary.caution {
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.cs-summary.high {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.cs-findings {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  max-height: 190px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cs-finding {
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  padding: 7px 8px;
+}
+
+.cs-finding .cs-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #991b1b;
+  margin-bottom: 4px;
+}
+
+.cs-finding.confidence-medium .cs-tag {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.cs-finding p {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #374151;
+  font-style: italic;
+  word-break: break-word;
+}
+
+.cs-copy-btn {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+  color: #1f2937;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cs-copy-btn:disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.cs-copy-btn:not(:disabled):hover {
+  background: #f3f4f6;
+}
+
+.cs-footnote {
+  margin: 9px 0 0;
+  font-size: 10.5px;
+  line-height: 1.4;
+  color: #9ca3af;
+  text-align: center;
+}

@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "CloakScan",
+  "version": "0.1.0",
+  "description": "Scans the page you're on for text and instructions hidden from view, before you hand that page to an AI agent or paste it into a chatbot.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CloakScan"
+  },
+  "permissions": ["activeTab", "scripting", "storage"]
+}

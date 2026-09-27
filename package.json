@@ -1,0 +1,22 @@
+{
+  "name": "cloakscan",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Browser extension that scans the page you're on for text hidden from you but readable by an AI agent.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Mike Schecht",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0"
+  }
+}
