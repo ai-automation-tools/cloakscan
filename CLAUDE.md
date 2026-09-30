@@ -31,7 +31,8 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. Wo
 - `src/index.html`, `script.js`, `style.css` and `sample-data.json` are the demo. It
   loads `extension/popup.js` itself, so the popup code is shared. `popup.js` tells the two
   hosts apart with its `inExtension` check.
-- `scripts/build.js` copies `src/extension/` to `dist/extension/`.
+- `scripts/build.js` copies `src/extension/` to `dist/extension/`. `scripts/icons.js` redraws
+  the committed PNGs in `src/extension/icons/`; run it by hand only when the icon changes.
 - Tests: `node:test` and `node:assert/strict`, files in `test/*.test.js`. The detectors
   need real layout, so detection tests run in headless Chromium through Playwright, not
   jsdom. No Jest, no Vitest.

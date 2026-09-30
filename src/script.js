@@ -64,7 +64,7 @@ async function main() {
     <p id="cs-summary" class="cs-summary"></p>
     <ul id="cs-findings" class="cs-findings"></ul>
     <button id="cs-copy-btn" class="cs-copy-btn" type="button" disabled>Copy visible-only text</button>
-    <p class="cs-footnote">Free: manual scans on the tab you're viewing. Pro: continuous scanning + agent-block mode.</p>
+    <p class="cs-footnote">Scans only when you click, only this tab. Nothing leaves your browser.</p>
   `;
 
   const toolbarBtn = document.getElementById("toolbar-btn");

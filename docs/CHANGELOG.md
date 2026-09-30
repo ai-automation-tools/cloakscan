@@ -15,6 +15,13 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 ## Unreleased
 
+**Added**
+- Toolbar icon set (16, 32, 48, 128 px) in `src/extension/icons/`, wired to `icons` and `action.default_icon` in the manifest. `scripts/icons.js` draws them with no dependencies. *Build*
+- `test/manifest.test.js` fails on any permission beyond `activeTab`, `scripting` and `storage`, on any `host_permissions`, `content_scripts` or `background` entry, on a missing icon size, and on Pro or agent-block copy in the popup. *Build*
+
+**Changed**
+- The popup footnote, in the extension and the demo, no longer advertises a Pro tier or an agent-block mode. It now says the scan runs only on click, only on this tab, and nothing leaves the browser. *Build*
+
 ## 2026-09-27
 
 **Added**

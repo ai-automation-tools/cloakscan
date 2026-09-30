@@ -13,7 +13,7 @@
 
 | Path | What it is |
 |:---|:---|
-| [**🧩 extension/**](extension/manifest.json) | The unpacked extension. `popup.js` runs the scan by injecting `content.js` into the active tab; `content.js` holds the six detectors and draws the outlines. |
+| [**🧩 extension/**](extension/manifest.json) | The unpacked extension. `popup.js` runs the scan by injecting `content.js` into the active tab; `content.js` holds the six detectors and draws the outlines. `icons/` is the 16/32/48/128 px toolbar icon set, drawn by `scripts/icons.js`. |
 | [**🖥️ index.html**](index.html) | The demo: a fake browser window around a fabricated review article with six pieces of hidden text planted in it. Opens straight from `file://`. |
 | [**script.js**](script.js) | Demo harness only. Mounts the popup and fakes the outlining `content.js` would do on a real tab. |
 | [**sample-data.json**](sample-data.json) | The demo article and its expected scan result. `index.html` carries an inline copy for browsers that block `fetch` on `file://`. |
