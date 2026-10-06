@@ -47,6 +47,44 @@ function mountPopup(popupHtml) {
   window.initCloakScanPopup(document);
 }
 
+// Light / dark switch for the demo page. The pre-paint script in index.html's <head> has
+// already applied the stored theme; DEFAULT_THEME here and its fallback there must agree.
+const THEME_KEY = "cloakscan.theme";
+const DEFAULT_THEME = "light";
+
+function readTheme() {
+  try {
+    const stored = localStorage.getItem(THEME_KEY);
+    return stored === "light" || stored === "dark" ? stored : DEFAULT_THEME;
+  } catch {
+    return DEFAULT_THEME;
+  }
+}
+
+function applyTheme(theme) {
+  const root = document.documentElement;
+  root.classList.toggle("dark", theme === "dark");
+  root.classList.toggle("light", theme !== "dark");
+  document.querySelectorAll("[data-theme-choice]").forEach((btn) => {
+    btn.setAttribute("aria-pressed", String(btn.dataset.themeChoice === theme));
+  });
+}
+
+function initThemeToggle() {
+  applyTheme(readTheme());
+  document.querySelectorAll("[data-theme-choice]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const theme = btn.dataset.themeChoice;
+      try {
+        localStorage.setItem(THEME_KEY, theme);
+      } catch {
+        // Storage blocked: the theme still applies for this visit.
+      }
+      applyTheme(theme);
+    });
+  });
+}
+
 async function main() {
   const data = await loadData();
   renderMockPage(data.mockPage);
@@ -84,4 +122,5 @@ async function main() {
   });
 }
 
+initThemeToggle();
 main();

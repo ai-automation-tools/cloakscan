@@ -18,6 +18,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 **Added**
 - Toolbar icon set (16, 32, 48, 128 px) in `src/extension/icons/`, wired to `icons` and `action.default_icon` in the manifest. `scripts/icons.js` draws them with no dependencies. *Build*
 - `test/manifest.test.js` fails on any permission beyond `activeTab`, `scripting` and `storage`, on any `host_permissions`, `content_scripts` or `background` entry, on a missing icon size, and on Pro or agent-block copy in the popup. *Build*
+- A light/dark switch on the demo page (`src/index.html`), top right. It themes the page, the mock browser chrome and the demo's popup panel; the mock article stays a light page in both, since one planted finding is white-on-white text. The choice persists in `localStorage` as `cloakscan.theme`, light by default, and a pre-paint script applies it with no flash. The shipped extension popup is unchanged. `test/demo-theme.test.js` keeps the two defaults in step.
 
 **Changed**
 - The popup footnote, in the extension and the demo, no longer advertises a Pro tier or an agent-block mode. It now says the scan runs only on click, only on this tab, and nothing leaves the browser. *Build*
