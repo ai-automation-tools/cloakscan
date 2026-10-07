@@ -35,8 +35,8 @@
 
 > [!WARNING]
 > **Not in the Chrome Web Store yet.** This is the working prototype, loadable unpacked.
-> Tests for the detectors, the store package, and the public demo are next on the
-> [roadmap](docs/ROADMAP.md).
+> The detectors are tested against a fixture page in headless Chromium; the store
+> package and the public demo are next on the [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
 
@@ -73,7 +73,8 @@ npm run build
 
 # 3. In Chrome: chrome://extensions, turn on Developer mode, Load unpacked, pick dist/extension/
 
-# 4. Tests and lint
+# 4. Tests and lint (the detection test runs in headless Chromium, installed once)
+npx playwright install chromium
 npm test && npm run lint
 ```
 
@@ -86,7 +87,7 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, and the product spec and build plan. |
-| [**🧪 test/**](test/manifest.test.js) | Tests for `node --test`. |
+| [**🧪 test/**](test/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does. |
 | [**🤖 CLAUDE.md**](CLAUDE.md) | Standing orders for the agent that works the roadmap each week. |
 
 ---
