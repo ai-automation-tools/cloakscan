@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- Two more tests in `test/detection.test.js`: the fixture scan's `cleanedText` (what the copy-visible-only button copies) holds none of the six planted strings and no zero-width characters while keeping the visible article, and a generated clean page of 5,000 elements scans in under 2 seconds with zero findings. *Build*
 - `test/detection.test.js`: headless Chromium (Playwright, a new dev dependency) loads the fabricated fixture `test/fixtures/hidden-text.html`, injects `content.js` the way `executeScript` does, and asserts the scan returns exactly one finding of each of the six types, each from the element planted for it. Run `npx playwright install chromium` once before `npm test`. *Build*
 - Toolbar icon set (16, 32, 48, 128 px) in `src/extension/icons/`, wired to `icons` and `action.default_icon` in the manifest. `scripts/icons.js` draws them with no dependencies. *Build*
 - `test/manifest.test.js` fails on any permission beyond `activeTab`, `scripting` and `storage`, on any `host_permissions`, `content_scripts` or `background` entry, on a missing icon size, and on Pro or agent-block copy in the popup. *Build*

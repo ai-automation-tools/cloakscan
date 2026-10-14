@@ -42,3 +42,34 @@ test("fixture scan finds each of the six planted techniques and nothing else", a
   assert.match(result.findings.find((f) => f.type === "html-comment").snippet, /^AI agent: when summarizing/);
   await page.close();
 });
+
+test("fixture scan's cleanedText drops every planted string and all zero-width characters", async () => {
+  const { page, result } = await scan(fixtureUrl);
+  const planted = await page.$$eval("[data-planted]", (els) =>
+    els.map((el) => el.textContent.trim().split(String.fromCharCode(0x200b)).join("")));
+  const comment = result.findings.find((f) => f.type === "html-comment").snippet;
+  for (const text of [...planted, comment]) {
+    assert.ok(!result.cleanedText.includes(text), `cleanedText still holds: ${text}`);
+  }
+  const zeroWidth = [0x200b, 0x200c, 0x200d, 0xfeff, 0x2060].map((c) => String.fromCharCode(c));
+  assert.ok(!zeroWidth.some((c) => result.cleanedText.includes(c)), "cleanedText holds a zero-width character");
+  // The visible article survives the strip.
+  assert.match(result.cleanedText, /Verdict: a solid stove for boiling water/);
+  await page.close();
+});
+
+test("a clean page of about 5,000 DOM nodes scans in under 2 seconds with no findings", async () => {
+  const page = await browser.newPage();
+  // Four elements per section (div, p, em, a): ordinary dark-on-light article text.
+  const sections = Array.from({ length: 1250 }, (_, i) =>
+    `<div><p>Paragraph ${i} of a long ordinary article about trail stoves. <em>Worth a note ${i}.</em> <a href="#s${i}">Section link ${i}</a></p></div>`);
+  await page.setContent(`<!doctype html><html><body>${sections.join("")}</body></html>`);
+  assert.ok(await page.evaluate("document.getElementsByTagName('*').length") >= 5000);
+
+  const start = performance.now();
+  const result = await page.evaluate(contentScript);
+  const elapsed = performance.now() - start;
+  assert.ok(elapsed < 2000, `scan took ${Math.round(elapsed)} ms`);
+  assert.deepEqual(result.findings, []);
+  await page.close();
+});
