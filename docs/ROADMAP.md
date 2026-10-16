@@ -16,7 +16,8 @@ One item per weekly run. Take the first open box from the top. Every item above
 when all of them read `- [x]`.
 
 Markers: `- [ ]` open · `- [-]` claimed by a run in progress · `- [x]` done ·
-`- [!]` blocked, reason on the line · `🔒 Needs Mike` only Mike can do it.
+`- [!]` blocked, reason on the line · `🔒 Needs Mike` only Mike can do it ·
+`small` docs or config a run can batch, up to four per PR (untagged = a feature, one per run).
 
 The slices come from [product/build-plan.md](product/build-plan.md). Slice 0, the
 prototype, is already in `src/`. The Chrome Web Store listing (Slice 3) and the launch
@@ -35,14 +36,14 @@ listing needs, so submitting it is a paste job.
 
 ## 🚦 Public release
 
-- [ ] **CI.** `.github/workflows/ci.yml` runs `npm ci`, `npm run lint`, `npm test` (including the headless browser test) and `npm run build` on push to `main` and on every PR, with an explicit `permissions: contents: read` block, and the latest run on `main` is green.
-- [ ] **README usage matches the code.** Every step in the README (load unpacked, scan, copy, build, test) was run against the real build and behaves as written.
-- [ ] **Security.** `SECURITY.md` says how to report a vulnerability. A full-history secret scan (`gitleaks detect --log-opts="--all"` or equivalent) comes back clean, and the command and result are recorded in the PR that ticks this box.
-- [ ] **Privacy policy.** `PRIVACY.md` states what the extension collects (nothing), what it stores (the last scan, in `chrome.storage.local`, on the device) and what it sends anywhere (nothing). The Chrome Web Store requires a policy URL, and this file is it.
-- [ ] **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write.
+- [ ] `small` **CI.** `.github/workflows/ci.yml` runs `npm ci`, `npm run lint`, `npm test` (including the headless browser test) and `npm run build` on push to `main` and on every PR, with an explicit `permissions: contents: read` block, and the latest run on `main` is green.
+- [ ] `small` **README usage matches the code.** Every step in the README (load unpacked, scan, copy, build, test) was run against the real build and behaves as written.
+- [ ] `small` **Security.** `SECURITY.md` says how to report a vulnerability. A full-history secret scan (`gitleaks detect --log-opts="--all"` or equivalent) comes back clean, and the command and result are recorded in the PR that ticks this box.
+- [ ] `small` **Privacy policy.** `PRIVACY.md` states what the extension collects (nothing), what it stores (the last scan, in `chrome.storage.local`, on the device) and what it sends anywhere (nothing). The Chrome Web Store requires a policy URL, and this file is it.
+- [ ] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write.
 - [ ] **Live demo at `https://ai-automation-tools.dev/cloakscan/`.** Served by GitHub Pages from this repo through an `actions/deploy-pages` workflow publishing `src/`. A visitor opens the mock browser, clicks Scan, and sees the six findings outlined on the fabricated article with nothing to install. The org source bar sits across the very top, its note saying this is a demo and its View source link pointing at `https://github.com/ai-automation-tools/cloakscan`.
-- [ ] **Demo is safe to publish.** The article is fabricated and names no real person or retailer. No personal data, no local paths, and no network request other than the page loading its own files.
-- [ ] **README hero points at the demo.** The Live Demo badge and nav links resolve to the Pages URL above the fold.
+- [ ] `small` **Demo is safe to publish.** The article is fabricated and names no real person or retailer. No personal data, no local paths, and no network request other than the page loading its own files.
+- [ ] `small` **README hero points at the demo.** The Live Demo badge and nav links resolve to the Pages URL above the fold.
 
 ## After public release
 
