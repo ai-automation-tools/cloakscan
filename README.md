@@ -58,8 +58,8 @@ background script, and nothing leaves your browser.
 | **Color-matched text** | Contrast between the text and its nearest background under 1.15:1 |
 | **Off-screen positioning** | Absolutely or fixed-positioned and more than 200px outside the viewport |
 | **Shrunk to invisible** | Font size of 1px or less, or a 1x1 box with overflow hidden |
-| **Hidden from screen readers** | `aria-hidden="true"` on text that reads like an instruction |
-| **HTML comments** | Comments whose text reads like an instruction |
+| **Hidden from screen readers** | `aria-hidden="true"` on text addressed to a model or overriding one ([ADR-003](docs/decisions/adr-003-instruction-phrasing.md)) |
+| **HTML comments** | Comments with the same instruction phrasing |
 | **Zero-width characters** | U+200B, U+200C, U+200D, U+FEFF or U+2060 inside ordinary text |
 
 ## 🚀 Quick start

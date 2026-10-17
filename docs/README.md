@@ -27,6 +27,12 @@
 |:---|:---|
 | [**📦 product/**](product/README.md) | The v1 spec with its Won't list, and the five-slice build plan where the launch is the actual experiment. |
 
+## ⚖️ Decisions
+
+| Document | What's inside |
+|:---|:---|
+| [**ADR-003: instruction phrasing**](decisions/adr-003-instruction-phrasing.md) | How the aria-hidden and comment checks decide text reads like an instruction, the options weighed, and what it misses on purpose. ADR-001 and ADR-002 stay in the private plan; `CLAUDE.md` summarizes them. |
+
 <p align="right">(<a href="#docs-top">back to top</a>)</p>
 
 ---

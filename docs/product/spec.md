@@ -51,5 +51,5 @@
 
 ## Open questions
 
-- Should the aria-hidden "instruction-like phrasing" heuristic use a fixed keyword list (current prototype approach) or something more robust? The source idea's own roadmap flags the current list as "hand-written," not built from real cases. Owner: whoever picks up the first weekly increment; decide by the second build slice, since the third-party keyword list is also where a determined attacker would first try to evade detection.
+- **Decided 2026-10-16 in [ADR-003](../decisions/adr-003-instruction-phrasing.md): word-bounded patterns that need a model addressee or an override.** Should the aria-hidden "instruction-like phrasing" heuristic use a fixed keyword list (current prototype approach) or something more robust? The source idea's own roadmap flags the current list as "hand-written," not built from real cases. Owner: whoever picks up the first weekly increment; decide by the second build slice, since the third-party keyword list is also where a determined attacker would first try to evade detection.
 - Which launch channel (Show HN, dev.to, r/artificial, or just the org front door) gets tried first, and when — the decision memo's falsifier (100 installs by 2027-03-22) only means something if a real launch attempt actually happens. Owner: Mike, decide before the repo goes public.
