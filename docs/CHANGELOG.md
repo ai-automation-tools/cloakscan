@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- [ADR-003](decisions/adr-003-instruction-phrasing.md) settles the spec's open question on instruction-like phrasing, and a test in `test/detection.test.js` checks 13 phrasings the checks catch, 5 ordinary sentences they leave alone, and 3 known misses (no addressee, obfuscated, non-English). *Build*
 - Two more tests in `test/detection.test.js`: the fixture scan's `cleanedText` (what the copy-visible-only button copies) holds none of the six planted strings and no zero-width characters while keeping the visible article, and a generated clean page of 5,000 elements scans in under 2 seconds with zero findings. *Build*
 - `test/detection.test.js`: headless Chromium (Playwright, a new dev dependency) loads the fabricated fixture `test/fixtures/hidden-text.html`, injects `content.js` the way `executeScript` does, and asserts the scan returns exactly one finding of each of the six types, each from the element planted for it. Run `npx playwright install chromium` once before `npm test`. *Build*
 - Toolbar icon set (16, 32, 48, 128 px) in `src/extension/icons/`, wired to `icons` and `action.default_icon` in the manifest. `scripts/icons.js` draws them with no dependencies. *Build*
@@ -23,6 +24,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - A light/dark switch on the demo page (`src/index.html`), top right. It themes the page, the mock browser chrome and the demo's popup panel; the mock article stays a light page in both, since one planted finding is white-on-white text. The choice persists in `localStorage` as `cloakscan.theme`, light by default, and a pre-paint script applies it with no flash. The shipped extension popup is unchanged. `test/demo-theme.test.js` keeps the two defaults in step.
 
 **Changed**
+- The aria-hidden and HTML-comment checks match word-bounded patterns that need a model addressee or an override ("ignore previous instructions", "you are a shopping assistant", "AI agent:", "do not tell the user") instead of bare substrings. Ordinary copy like "we recommend the", "act as" and `<!-- override default styles -->` no longer gets flagged. *Build*
 - The popup footnote, in the extension and the demo, no longer advertises a Pro tier or an agent-block mode. It now says the scan runs only on click, only on this tab, and nothing leaves the browser. *Build*
 
 ## 2026-09-27

@@ -3,12 +3,23 @@
 (() => {
   const CSS_PREFIX = "cloakscan";
   const ZERO_WIDTH = /\u200B|\u200C|\u200D|\uFEFF|\u2060/;
-  const KEYWORDS = [
-    "ignore previous", "ignore the negative", "ignore all prior",
-    "system:", "assistant:", "you are an ai", "you are a shopping assistant",
-    "ai agent", "when summarizing", "when summarising", "do not tell the user",
-    "do not mention", "act as", "recommend the", "add it to the cart",
-    "override", "always upsell", "as an ai language model",
+  // ADR-003: text reads as an instruction only if it addresses a model or tries to override
+  // one. A marketing verb on its own ("recommend the", "act as", "override") no longer counts.
+  const INSTRUCTION_PATTERNS = [
+    // "ignore previous instructions", "disregard all prior rules", "ignore the negative reviews above"
+    /\b(ignore|disregard|forget|override)\b[^.]{0,30}\b(previous|prior|above|earlier|preceding|all|any|negative|your)\b[^.]{0,20}\b(instructions?|prompts?|rules|directions|guidelines|reviews?|context)\b/i,
+    // "you are an AI", "act as a shopping assistant", "pretend to be a helpful chatbot"
+    /\b(you are|you're|act as|pretend to be|role-?play as)\s+(an?\s+|the\s+)?(\w+\s+)?(ai|assistant|chatbot|language model|llm)\b/i,
+    // a chat role line: "System: ...", "Assistant: ..."
+    /^\s*(system|assistant|developer)\s*:/im,
+    // a note addressed to a model: "AI agent: ...", "AI agent instructions: ...", "LLM:"
+    /\b(ai|llm|chatbot)( agents?| assistants?| models?)?( instructions?)?\s*:/i,
+    /\b(note|message|instructions?) (to|for) (the |any )?(ai|llm|language model|chatbot|assistant|agent)s?\b/i,
+    // "when summarizing this page", "while summarising the article"
+    /\b(when|while|if)\s+(summari[sz]ing|describing|reviewing)\s+(this|the)\s+(page|article|site|review|content|text)\b/i,
+    // "do not tell the user", "never reveal to the reader"
+    /\b(do not|don't|never)\s+(tell|mention|reveal|disclose|inform|show)\b[^.]{0,30}\b(users?|readers?|human|customers?)\b/i,
+    /\bas an ai language model\b/i,
   ];
 
   document.querySelectorAll(`.${CSS_PREFIX}-badge`).forEach((el) => el.remove());
@@ -18,9 +29,8 @@
     el.removeAttribute(`data-${CSS_PREFIX}-flagged`);
   });
 
-  function matchesKeyword(text) {
-    const lower = text.toLowerCase();
-    return KEYWORDS.some((k) => lower.includes(k));
+  function readsAsInstruction(text) {
+    return INSTRUCTION_PATTERNS.some((p) => p.test(text));
   }
 
   function parseColor(value) {
@@ -98,7 +108,7 @@
     } else if (isShrunkAway(el, cs)) {
       findings.push(flag(el, "zero-size", "medium", text));
       seen.add(el);
-    } else if (el.getAttribute("aria-hidden") === "true" && matchesKeyword(text)) {
+    } else if (el.getAttribute("aria-hidden") === "true" && readsAsInstruction(text)) {
       findings.push(flag(el, "aria-hidden", "high", text));
       seen.add(el);
     }
@@ -112,7 +122,7 @@
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
   let commentNode;
   while ((commentNode = walker.nextNode())) {
-    if (matchesKeyword(commentNode.nodeValue)) {
+    if (readsAsInstruction(commentNode.nodeValue)) {
       findings.push({ type: "html-comment", confidence: "high", snippet: commentNode.nodeValue.trim().slice(0, 160), el: null });
     }
   }

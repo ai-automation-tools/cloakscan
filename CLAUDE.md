@@ -56,6 +56,10 @@ npm run build
   Registering and submitting is Mike's job; preparing everything he needs is yours.
 - **ADR-002: no telemetry.** The extension makes no network calls, ever. Not usage pings,
   not error reports, not an update check. Install counts come from the store dashboard.
+- **ADR-003: instruction phrasing** (`docs/decisions/adr-003-instruction-phrasing.md`). The
+  aria-hidden and comment checks use word-bounded patterns that need a model addressee or
+  an override, not bare keywords. A new pattern comes with a phrase it catches and an
+  ordinary sentence it leaves alone, in the "instruction phrasing" test.
 
 ## Invariants
 
