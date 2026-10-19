@@ -1,23 +1,27 @@
-<h1 align="center">🗺️ CloakScan Roadmap</h1>
+<h1 align="center">🗺️ Roadmap</h1>
 
 <p align="center">
   <em>Everything between a working prototype and a public, demoable CloakScan, in the order it has to happen.</em>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/stage-incubating-F59E0B?style=for-the-badge" alt="Stage: incubating">
-  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs-6B7280?style=for-the-badge" alt="Docs home"></a>
+  <img src="https://img.shields.io/badge/now-slice_1:_harden_and_test-F59E0B?style=for-the-badge" alt="Now: Slice 1, harden and test">
+  <img src="https://img.shields.io/badge/stage-incubating-2ea44f?style=for-the-badge" alt="Stage: incubating">
+  <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
 
 ---
 
-One item per weekly run. Take the first open box from the top. Every item above
-[After public release](#after-public-release) is a release gate: CloakScan goes public
-when all of them read `- [x]`.
+The CloakScan Weekly Roadmap routine works this file top to bottom every Tuesday and Friday:
+it takes the first open item that isn't `🔒 Needs Mike` (or up to four `small` ones), builds
+it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above `## After public
+release` is a release gate.** CloakScan goes public when all of them are ticked and Mike
+says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates any doc
+it made stale, in the same commit.
 
-Markers: `- [ ]` open · `- [-]` claimed by a run in progress · `- [x]` done ·
-`- [!]` blocked, reason on the line · `🔒 Needs Mike` only Mike can do it ·
-`small` docs or config a run can batch, up to four per PR (untagged = a feature, one per run).
+Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
+(the reason follows on the line). `small` marks docs or config a run can batch, up to four
+per PR (untagged means a feature, one per run); `🔒 Needs Mike` marks one only Mike can do.
 
 The slices come from [product/build-plan.md](product/build-plan.md). Slice 0, the
 prototype, is already in `src/`. The Chrome Web Store listing (Slice 3) and the launch
@@ -25,12 +29,12 @@ prototype, is already in `src/`. The Chrome Web Store listing (Slice 3) and the 
 plus its demo can go public without them. What the gates do include is everything the
 listing needs, so submitting it is a paste job.
 
-## 🔨 Build
+## 🔨 Slice 1: Harden and test what already works
 
-- [x] **Slice 1a: trim the prototype to the spec.** _(2026-09-29: done. Footnote rewritten in both copies, icon set drawn by `scripts/icons.js`, manifest test covers permissions, icons and the footnote.)_ The popup footnote stops advertising a Pro tier and an agent-block mode (both on the spec's Won't list), in `src/extension/popup.html` and in the demo's copy of the popup markup in `src/script.js`. The manifest gets a 16/32/48/128 px icon set under `src/extension/icons/` and an `action.default_icon`. `test/manifest.test.js` fails if the manifest declares any permission other than `activeTab`, `scripting` and `storage`, or any `host_permissions` or `content_scripts` entry.
-- [x] **Slice 1b: fixture detection test in a real browser.** _(2026-10-06: done. `test/detection.test.js` runs `content.js` on `test/fixtures/hidden-text.html` in headless Chromium and asserts exactly the six planted types, each from its planted element.)_ A headless Chromium test (Playwright as a dev dependency) loads a fixture page carrying one planted example of each of the six techniques, injects `src/extension/content.js`, and asserts all six come back with the right `type`. jsdom won't do here: the detectors read computed styles and layout boxes, which jsdom doesn't calculate. `npm test` runs it.
-- [x] **Slice 1c: copy-visible-only and scan latency.** _(2026-10-13: done. `test/detection.test.js` checks the fixture's `cleanedText` holds no planted string or zero-width character, and that a clean 5,000-element page scans in about 0.2 s with zero findings.)_ Tests assert the fixture scan's `cleanedText` contains none of the six planted strings and no zero-width characters, and that a scan of a generated page of about 5,000 DOM nodes finishes in under 2 seconds.
-- [x] **Decide how the aria-hidden check spots instruction-like text.** _(2026-10-16: done. [ADR-003](decisions/adr-003-instruction-phrasing.md) picks word-bounded patterns that need a model addressee or an override over the substring list; `test/detection.test.js` covers 13 phrasings caught, 5 ordinary sentences the old list flagged, and 3 known misses.)_ The spec's open question, due before the public release. Write `docs/decisions/adr-003-instruction-phrasing.md` comparing the current hand-written keyword list with at least one alternative, pick one, and implement it with tests for phrasings it catches and ones it knowingly misses. English only, per the spec.
+- [x] **Slice 1a: trim the prototype to the spec.** The popup footnote stops advertising a Pro tier and an agent-block mode (both on the spec's Won't list), in `src/extension/popup.html` and in the demo's copy of the popup markup in `src/script.js`. The manifest gets a 16/32/48/128 px icon set under `src/extension/icons/` and an `action.default_icon`. `test/manifest.test.js` fails if the manifest declares any permission other than `activeTab`, `scripting` and `storage`, or any `host_permissions` or `content_scripts` entry. — done 2026-09-29: footnote rewritten in both copies, icon set drawn by `scripts/icons.js`, manifest test covers permissions, icons and the footnote
+- [x] **Slice 1b: fixture detection test in a real browser.** A headless Chromium test (Playwright as a dev dependency) loads a fixture page carrying one planted example of each of the six techniques, injects `src/extension/content.js`, and asserts all six come back with the right `type`. jsdom won't do here: the detectors read computed styles and layout boxes, which jsdom doesn't calculate. `npm test` runs it. — done 2026-10-06: `test/detection.test.js` runs `content.js` on `test/fixtures/hidden-text.html` in headless Chromium and asserts exactly the six planted types, each from its planted element
+- [x] **Slice 1c: copy-visible-only and scan latency.** Tests assert the fixture scan's `cleanedText` contains none of the six planted strings and no zero-width characters, and that a scan of a generated page of about 5,000 DOM nodes finishes in under 2 seconds. — done 2026-10-13: `test/detection.test.js` checks the fixture's `cleanedText` holds no planted string or zero-width character, and that a clean 5,000-element page scans in about 0.2 s with zero findings
+- [x] **Decide how the aria-hidden check spots instruction-like text.** The spec's open question, due before the public release. Write `docs/decisions/adr-003-instruction-phrasing.md` comparing the current hand-written keyword list with at least one alternative, pick one, and implement it with tests for phrasings it catches and ones it knowingly misses. English only, per the spec. — done 2026-10-16: [ADR-003](decisions/adr-003-instruction-phrasing.md) picks word-bounded patterns that need a model addressee or an override over the substring list; `test/detection.test.js` covers 13 phrasings caught, 5 ordinary sentences the old list flagged, and 3 known misses
 - [ ] **No network code in the shipped extension.** The demo-only `loadSampleData` (it calls `fetch`) moves out of `src/extension/popup.js` into the demo harness. A test fails if any file under `src/extension/` contains `fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon` or `EventSource`.
 - [ ] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency.
 
@@ -47,7 +51,7 @@ listing needs, so submitting it is a paste job.
 
 ## After public release
 
-These don't block graduation.
+Nothing below blocks go-live.
 
 ### 🧩 Listing and launch (Slices 3 to 5)
 
@@ -58,22 +62,22 @@ These don't block graduation.
 - [ ] Slice 5, post-launch fixes: triage every issue opened in the first four weeks after launch, and fix the ones that block normal use.
 - [ ] 2027-03-22 check against the decision memo: under 100 installs despite a real launch means the distribution bet failed, and the ledger row moves to `rejected`. 🔒 Needs Mike
 
-### 🔭 Should, from the spec
-
-- [ ] Firefox build from the same source, loaded as a temporary add-on and passing the same fixture test.
-- [ ] A shareable "page hygiene" report for teams auditing their own pages. Needs its own scoping note first, since a link implies hosting.
-
-### 📣 Publish & promote
+### 📣 Publish and promote
 
 - [ ] Custom subdomain `cloakscan.ai-automation-tools.dev`. 🔒 Needs Mike
 
-### 💰 Monetize
+### 💰 Revenue
 
 - [ ] Decide whether continuous scanning as a paid tier is worth scoping. Only if the 2027-03-22 check passes, and with its own ADR. 🔒 Needs Mike
+
+### 🔭 Later
+
+- [ ] Firefox build from the same source, loaded as a temporary add-on and passing the same fixture test. (A Should from the spec.)
+- [ ] A shareable "page hygiene" report for teams auditing their own pages. Needs its own scoping note first, since a link implies hosting. (A Should from the spec.)
 
 ---
 
 <p align="center">
   <a href="README.md">← Docs home</a> ·
-  <a href="CHANGELOG.md">Next: Changelog →</a>
+  <a href="CHANGELOG.md">Changelog →</a>
 </p>
