@@ -28,6 +28,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - The popup footnote, in the extension and the demo, no longer advertises a Pro tier or an agent-block mode. It now says the scan runs only on click, only on this tab, and nothing leaves the browser. *Build*
 
 **Docs**
+- 2026-10-19: release scope cut to the MVP (pipeline change, Mike). The store-ready package and the Chrome Web Store submission kit moved below `## After public release`, to the top of Listing and launch; the demo-safety and README-hero items folded into the live-demo item; the routine now runs Tue/Thu/Sat and batches up to six `small` items. No item dropped.
 - 2026-10-19: the roadmap moved onto the lab's roadmap standard: `now` and `stage` badges, an intro naming the CloakScan Weekly Roadmap routine, the Build section headed as Slice 1 from the build plan, done notes moved to the end of each item (`— done YYYY-MM-DD: …`), and the Should items regrouped under Later. No items added or dropped, and every state is unchanged.
 
 ## 2026-09-27

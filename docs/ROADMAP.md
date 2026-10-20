@@ -12,22 +12,23 @@
 
 ---
 
-The CloakScan Weekly Roadmap routine works this file top to bottom every Tuesday and Friday:
-it takes the first open item that isn't `🔒 Needs Mike` (or up to four `small` ones), builds
+The CloakScan Weekly Roadmap routine works this file top to bottom every Tuesday, Thursday and Saturday:
+it takes the first open item that isn't `🔒 Needs Mike` (or up to six `small` ones), builds
 it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above `## After public
 release` is a release gate.** CloakScan goes public when all of them are ticked and Mike
 says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates any doc
 it made stale, in the same commit.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
-(the reason follows on the line). `small` marks docs or config a run can batch, up to four
+(the reason follows on the line). `small` marks docs or config a run can batch, up to six
 per PR (untagged means a feature, one per run); `🔒 Needs Mike` marks one only Mike can do.
 
 The slices come from [product/build-plan.md](product/build-plan.md). Slice 0, the
 prototype, is already in `src/`. The Chrome Web Store listing (Slice 3) and the launch
 (Slice 4) sit below the release line: both need Mike's account and money, and the repo
-plus its demo can go public without them. What the gates do include is everything the
-listing needs, so submitting it is a paste job.
+plus its demo can go public without them. Since 2026-10-19 the store package and the submission
+kit sit below the line too, at the top of Listing and launch: the repo and its demo go
+public at the MVP, and the listing work follows before Mike submits.
 
 ## 🔨 Slice 1: Harden and test what already works
 
@@ -36,7 +37,6 @@ listing needs, so submitting it is a paste job.
 - [x] **Slice 1c: copy-visible-only and scan latency.** Tests assert the fixture scan's `cleanedText` contains none of the six planted strings and no zero-width characters, and that a scan of a generated page of about 5,000 DOM nodes finishes in under 2 seconds. — done 2026-10-13: `test/detection.test.js` checks the fixture's `cleanedText` holds no planted string or zero-width character, and that a clean 5,000-element page scans in about 0.2 s with zero findings
 - [x] **Decide how the aria-hidden check spots instruction-like text.** The spec's open question, due before the public release. Write `docs/decisions/adr-003-instruction-phrasing.md` comparing the current hand-written keyword list with at least one alternative, pick one, and implement it with tests for phrasings it catches and ones it knowingly misses. English only, per the spec. — done 2026-10-16: [ADR-003](decisions/adr-003-instruction-phrasing.md) picks word-bounded patterns that need a model addressee or an override over the substring list; `test/detection.test.js` covers 13 phrasings caught, 5 ordinary sentences the old list flagged, and 3 known misses
 - [ ] **No network code in the shipped extension.** The demo-only `loadSampleData` (it calls `fetch`) moves out of `src/extension/popup.js` into the demo harness. A test fails if any file under `src/extension/` contains `fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon` or `EventSource`.
-- [ ] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency.
 
 ## 🚦 Public release
 
@@ -44,10 +44,7 @@ listing needs, so submitting it is a paste job.
 - [ ] `small` **README usage matches the code.** Every step in the README (load unpacked, scan, copy, build, test) was run against the real build and behaves as written.
 - [ ] `small` **Security.** `SECURITY.md` says how to report a vulnerability. A full-history secret scan (`gitleaks detect --log-opts="--all"` or equivalent) comes back clean, and the command and result are recorded in the PR that ticks this box.
 - [ ] `small` **Privacy policy.** `PRIVACY.md` states what the extension collects (nothing), what it stores (the last scan, in `chrome.storage.local`, on the device) and what it sends anywhere (nothing). The Chrome Web Store requires a policy URL, and this file is it.
-- [ ] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write.
-- [ ] **Live demo at `https://ai-automation-tools.dev/cloakscan/`.** Served by GitHub Pages from this repo through an `actions/deploy-pages` workflow publishing `src/`. A visitor opens the mock browser, clicks Scan, and sees the six findings outlined on the fabricated article with nothing to install. The org source bar sits across the very top, its note saying this is a demo and its View source link pointing at `https://github.com/ai-automation-tools/cloakscan`.
-- [ ] `small` **Demo is safe to publish.** The article is fabricated and names no real person or retailer. No personal data, no local paths, and no network request other than the page loading its own files.
-- [ ] `small` **README hero points at the demo.** The Live Demo badge and nav links resolve to the Pages URL above the fold.
+- [ ] **Live demo at `https://ai-automation-tools.dev/cloakscan/`.** Served by GitHub Pages from this repo through an `actions/deploy-pages` workflow publishing `src/`. A visitor opens the mock browser, clicks Scan, and sees the six findings outlined on the fabricated article with nothing to install. The org source bar sits across the very top, its note saying this is a demo and its View source link pointing at `https://github.com/ai-automation-tools/cloakscan`. Safe to publish: the article is fabricated and names no real person or retailer. No personal data, no local paths, and no network request other than the page loading its own files. The README hero's Live Demo badge and nav links resolve to the Pages URL above the fold.
 
 ## After public release
 
@@ -55,6 +52,8 @@ Nothing below blocks go-live.
 
 ### 🧩 Listing and launch (Slices 3 to 5)
 
+- [ ] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency.
+- [ ] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write.
 - [ ] Register the org's Chrome Web Store developer account ($5 one-time, per ADR-001; not Mike's personal account). 🔒 Needs Mike
 - [ ] Submit the listing using `docs/store/` and see it through review. 🔒 Needs Mike
 - [ ] Once the listing is live: an "Install from Chrome Web Store" badge in the README hero, and the org front door links the listing instead of the demo alone.
