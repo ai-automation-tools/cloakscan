@@ -67,8 +67,9 @@ npm run build
   `host_permissions`, no `<all_urls>`, no `content_scripts` in the manifest, no background
   service worker that watches tabs. This is the product's main trust signal.
 - **No network code under `src/extension/`.** No `fetch`, `XMLHttpRequest`, `WebSocket`,
-  `sendBeacon`, `EventSource`, or remote script or font. (One demo-only `fetch` still sits
-  in `popup.js`; a roadmap item moves it out.) The demo may load its own same-origin files.
+  `sendBeacon`, `EventSource`, or remote script or font; `test/manifest.test.js` checks the
+  first five. The demo may load its own same-origin files: `src/script.js` fetches
+  `sample-data.json`.
 - **The demo works from `file://` with no server**, and on GitHub Pages.
 - Scans finish within 2 seconds on a page of about 5,000 DOM nodes.
 - A clean page gives zero findings. A false positive on an ordinary article is a bug.
