@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 
 const manifest = JSON.parse(readFileSync("src/extension/manifest.json", "utf8"));
 
@@ -32,5 +32,14 @@ test("popup copy advertises no paid tier or agent-block mode", () => {
   for (const file of ["src/extension/popup.html", "src/script.js"]) {
     const text = readFileSync(file, "utf8");
     assert.doesNotMatch(text, /\bPro\b|agent-block|continuous scanning/i, file);
+  }
+});
+
+test("no file under src/extension/ holds network code (ADR-002)", () => {
+  const files = readdirSync("src/extension", { recursive: true }).filter((f) => /\.(js|html|css|json)$/.test(f));
+  assert.ok(files.includes("popup.js") && files.includes("content.js"), "walk found the extension scripts");
+  for (const file of files) {
+    const text = readFileSync(`src/extension/${file}`, "utf8");
+    assert.doesNotMatch(text, /fetch\(|XMLHttpRequest|WebSocket|sendBeacon|EventSource/, file);
   }
 });

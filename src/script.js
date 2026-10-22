@@ -2,12 +2,21 @@
 // fakes what extension/content.js would have done to a real page, since there's no live
 // tab here for chrome.scripting to inject into.
 
+// sample-data.json first, falling back to the inline copy in index.html for browsers
+// that block fetch on file:// pages. It lives here, not in extension/popup.js, so the
+// shipped extension holds no network code (ADR-002); the popup's demo branch calls it
+// through the window hook, so the harness and the popup never disagree about the data.
 async function loadData() {
-  // extension/popup.js defines this loader (fetch, falling back to the inline
-  // <script type="application/json"> block for file:// pages); reused here so
-  // the harness and the popup never disagree about where the demo data lives.
-  return window.__cloakscanLoadSampleData();
+  try {
+    const res = await fetch("sample-data.json");
+    if (res.ok) return await res.json();
+  } catch {
+    // fall through to inline fallback
+  }
+  const inline = document.getElementById("cloakscan-sample-data");
+  return inline ? JSON.parse(inline.textContent) : { mockPage: null, scanResult: { findings: [], cleanedText: "" } };
 }
+window.__cloakscanLoadSampleData = loadData;
 
 function renderMockPage(mockPage) {
   const article = document.getElementById("mock-page");

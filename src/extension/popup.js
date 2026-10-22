@@ -2,20 +2,6 @@
 // inExtension tells us which host we're in — every chrome.* call is guarded by it.
 const inExtension = typeof chrome !== "undefined" && !!chrome?.scripting && !!chrome?.tabs;
 
-// Demo-only: sample-data.json first, falling back to the inline copy in index.html
-// for browsers that block fetch() on file:// pages.
-async function loadSampleData() {
-  try {
-    const res = await fetch("sample-data.json");
-    if (res.ok) return await res.json();
-  } catch {
-    // fall through to inline fallback
-  }
-  const inline = document.getElementById("cloakscan-sample-data");
-  return inline ? JSON.parse(inline.textContent) : { mockPage: null, scanResult: { findings: [], cleanedText: "" } };
-}
-window.__cloakscanLoadSampleData = loadSampleData;
-
 const LABELS = {
   "color-match": "Color-matched text",
   offscreen: "Positioned off-screen",
@@ -79,7 +65,8 @@ function initCloakScanPopup(root = document) {
   }
 
   async function scanDemo() {
-    const data = await loadSampleData();
+    // The demo harness (../script.js) defines this loader; the extension never calls it.
+    const data = await window.__cloakscanLoadSampleData();
     const result = { ...data.scanResult, scannedAt: new Date().toISOString() };
     render(result);
     // The real extension would have just modified the live page via content.js.
