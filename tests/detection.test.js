@@ -7,7 +7,7 @@ import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 
 const contentScript = readFileSync("src/extension/content.js", "utf8");
-const fixtureUrl = pathToFileURL("test/fixtures/hidden-text.html").href;
+const fixtureUrl = pathToFileURL("tests/fixtures/hidden-text.html").href;
 
 let browser;
 before(async () => { browser = await chromium.launch(); });

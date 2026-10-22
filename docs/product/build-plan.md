@@ -1,6 +1,6 @@
 # Build plan: CloakScan v1
 
-> Copied from the CloakScan business plan (`Business-Plans/cloakscan/build/build-plan.md` in the private pipeline workspace) on 2026-09-27. The ADRs and estimate it cites stay in the private plan; `CLAUDE.md` summarizes both ADRs.
+> Copied from the CloakScan business plan (`Business-Plans/cloakscan/build/build-plan.md` in the private pipeline workspace) on 2026-09-27. The ADRs and estimate it cites stay in the private plan; `AGENTS.md` summarizes both ADRs.
 
 **Spec:** [spec.md](spec.md) · **Architecture:** ADR-001 (org Chrome Web Store account) and ADR-002 (no telemetry), private · **Estimate:** private
 
