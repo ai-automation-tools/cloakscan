@@ -3,7 +3,7 @@
 - **Status:** accepted, 2026-10-16
 - **Answers:** the spec's first open question ([spec.md](../product/spec.md#open-questions))
 - **Code:** `INSTRUCTION_PATTERNS` and `readsAsInstruction()` in `src/extension/content.js`
-- **Tests:** the "instruction phrasing" test in `test/detection.test.js`
+- **Tests:** the "instruction phrasing" test in `tests/detection.test.js`
 
 ## Context
 
