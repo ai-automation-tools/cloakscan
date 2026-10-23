@@ -35,8 +35,8 @@
 
 > [!WARNING]
 > **Not in the Chrome Web Store yet.** This is the working prototype, loadable unpacked.
-> The detectors are tested against a fixture page in headless Chromium; the store
-> package and the public demo are next on the [roadmap](docs/ROADMAP.md).
+> The detectors are tested against a fixture page in headless Chromium; the public
+> demo is next on the [roadmap](docs/ROADMAP.md), then the store package.
 
 ## 💡 What it's for
 
@@ -88,6 +88,9 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, and the product spec and build plan. |
 | [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. |
+| [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
+| [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
+| [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
 | [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. `CLAUDE.md` imports it for Claude Code. |
 
 ---

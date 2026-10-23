@@ -16,6 +16,10 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- `.github/workflows/ci.yml` runs `npm ci`, lint, the tests (with headless Chromium) and the build on every PR and every push to `main`, with read-only `contents` permission.
+- `SECURITY.md`: report vulnerabilities through GitHub's private advisories, and what counts as one. A full-history `gitleaks` scan came back clean. *Public release*
+- `PRIVACY.md`, the policy the store listing will link: nothing collected, the last scan kept in `chrome.storage.local` on the device, nothing sent anywhere. *Public release*
+- Every README step checked against the real build (build, load unpacked, scan, copy, test, lint, the `file://` demo). They behave as written; the README's status note now names the demo, not the store package, as next. *Public release*
 - `test/manifest.test.js` fails if any file under `src/extension/` contains `fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon` or `EventSource` (ADR-002). *Build*
 - [ADR-003](decisions/adr-003-instruction-phrasing.md) settles the spec's open question on instruction-like phrasing, and a test in `test/detection.test.js` checks 13 phrasings the checks catch, 5 ordinary sentences they leave alone, and 3 known misses (no addressee, obfuscated, non-English). *Build*
 - Two more tests in `test/detection.test.js`: the fixture scan's `cleanedText` (what the copy-visible-only button copies) holds none of the six planted strings and no zero-width characters while keeping the visible article, and a generated clean page of 5,000 elements scans in under 2 seconds with zero findings. *Build*
