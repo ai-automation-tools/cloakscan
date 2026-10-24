@@ -16,7 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
-- `.github/workflows/ci.yml` runs `npm ci`, lint, the tests (with headless Chromium) and the build on every PR and every push to `main`, with read-only `contents` permission.
+- `.github/workflows/ci.yml` runs `npm ci`, lint, the tests (with headless Chromium) and the build on every PR and every push to `main`, with read-only `contents` permission. *Public release*
 - `SECURITY.md`: report vulnerabilities through GitHub's private advisories, and what counts as one. A full-history `gitleaks` scan came back clean. *Public release*
 - `PRIVACY.md`, the policy the store listing will link: nothing collected, the last scan kept in `chrome.storage.local` on the device, nothing sent anywhere. *Public release*
 - Every README step checked against the real build (build, load unpacked, scan, copy, test, lint, the `file://` demo). They behave as written; the README's status note now names the demo, not the store package, as next. *Public release*
