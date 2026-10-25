@@ -22,6 +22,7 @@
   --fg: #1c1e26;
   --muted-fg: #5b6472;
   --ring: rgba(15, 118, 110, 0.8); /* 0.6 only reaches 2.4:1 on the light page; 0.8 clears 3:1 */
+  --accent: #0f766e;
 }
 
 /* Dark theme. Only the demo chrome and the popup panel change: the mock article inside
@@ -49,6 +50,7 @@
   --fg: #e5e7eb;
   --muted-fg: #9aa3b0;
   --ring: rgba(45, 212, 191, 0.6);
+  --accent: #2dd4bf;
 }
 
 * {
@@ -57,8 +59,8 @@
 
 body {
   margin: 0;
-  /* 52px top leaves room for the fixed theme switch above the browser window. */
-  padding: 52px 16px 48px;
+  /* The source bar sits flush with the top; the theme switch goes under it. */
+  padding: 0 16px 48px;
   background: var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   display: flex;
@@ -235,10 +237,53 @@ body {
   }
 }
 
-/* Light / dark switch, fixed top-right: the demo has no header of its own. */
+/* The org source bar, full-bleed across the very top (ai-automation-tools.dev convention).
+   In flow: the demo has no fixed chrome of its own to sit above. */
+.src-bar {
+  align-self: stretch;
+  margin: 0 -16px 36px; /* 36px leaves room for the theme switch below it */
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 34px;
+  padding: 0 16px;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--toolbar-border);
+  font-size: 12px;
+}
+
+.src-note {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--muted-fg);
+}
+
+.src-note strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.src-link {
+  margin-left: auto;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted-fg);
+  text-decoration: none;
+}
+
+.src-link:hover {
+  color: var(--fg);
+}
+
+/* Light / dark switch, top-right under the source bar: the demo has no header of its own. */
 .theme-toggle {
-  position: fixed;
-  top: 12px;
+  position: absolute;
+  top: 46px;
   right: 12px;
   z-index: 50;
   display: flex;

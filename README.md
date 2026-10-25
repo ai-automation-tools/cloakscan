@@ -11,6 +11,8 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-tools.dev/cloakscan/">Live Demo</a>
+  ·
   <a href="docs/ROADMAP.md">Roadmap</a>
   ·
   <a href="https://github.com/ai-automation-tools/cloakscan/issues">Report Bug</a>
@@ -19,6 +21,7 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-tools.dev/cloakscan/"><img src="https://img.shields.io/badge/demo-live-2ea44f?style=for-the-badge" alt="Live demo"></a>
   <img src="https://img.shields.io/badge/status-MVP_Prototype-F59E0B?style=for-the-badge" alt="Status: MVP prototype">
   <a href="docs/ROADMAP.md"><img src="https://img.shields.io/badge/plan-ROADMAP-8B5CF6?style=for-the-badge" alt="Roadmap"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge" alt="License: MIT"></a>
@@ -35,8 +38,9 @@
 
 > [!WARNING]
 > **Not in the Chrome Web Store yet.** This is the working prototype, loadable unpacked.
-> The detectors are tested against a fixture page in headless Chromium; the public
-> demo is next on the [roadmap](docs/ROADMAP.md), then the store package.
+> The detectors are tested against a fixture page in headless Chromium, and the
+> [live demo](https://ai-automation-tools.dev/cloakscan/) runs the same popup on a fabricated article. The store package is
+> next on the [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
 
@@ -78,8 +82,8 @@ npx playwright install chromium
 npm test && npm run lint
 ```
 
-To try it without installing anything, open `src/index.html` in a browser, click the
-CloakScan icon in the mock toolbar, then **Scan this page**.
+To try it without installing anything, open the [live demo](https://ai-automation-tools.dev/cloakscan/) (or `src/index.html`
+straight from disk), click the CloakScan icon in the mock toolbar, then **Scan this page**.
 
 ## 🗂️ What's in here
 
@@ -87,8 +91,8 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, and the product spec and build plan. |
-| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. |
-| [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
+| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `demo.test.js` clicks through the demo from `file://` and checks the source bar, the six findings and that it loads nothing but its own files. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. |
+| [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. `pages.yml` publishes `src/` to the [live demo](https://ai-automation-tools.dev/cloakscan/) when `src/` changes on `main`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
 | [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. `CLAUDE.md` imports it for Claude Code. |

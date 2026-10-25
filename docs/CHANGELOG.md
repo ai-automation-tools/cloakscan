@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- The live demo: `.github/workflows/pages.yml` publishes `src/` to [https://ai-automation-tools.dev/cloakscan/](https://ai-automation-tools.dev/cloakscan/) through `actions/deploy-pages` on every push to `main` that touches `src/`. The demo page gains the org source bar across the top (a demo note and a View source link to the repo), and the README hero links the demo. `tests/demo.test.js` clicks through it from `file://` in headless Chromium: source bar first, six findings listed, five outlined, no request beyond its own files.
 - `.github/workflows/ci.yml` runs `npm ci`, lint, the tests (with headless Chromium) and the build on every PR and every push to `main`, with read-only `contents` permission.
 - `SECURITY.md`: report vulnerabilities through GitHub's private advisories, and what counts as one. A full-history `gitleaks` scan came back clean. *Public release*
 - `PRIVACY.md`, the policy the store listing will link: nothing collected, the last scan kept in `chrome.storage.local` on the device, nothing sent anywhere. *Public release*
