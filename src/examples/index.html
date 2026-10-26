@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CloakScan — example pages</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../extension/icons/icon-32.png" />
+<style>
+  body { margin: 0; padding: 32px 16px 48px; background: #eef1f5; color: #1c1e26; font: 16px/1.55 system-ui, sans-serif; }
+  main { max-width: 44em; margin: 0 auto; }
+  h1 { font-size: 1.6rem; margin: 0 0 0.4em; }
+  a { color: #0f766e; }
+  ul { padding: 0; list-style: none; }
+  li { background: #fff; border: 1px solid #d8dce3; border-radius: 8px; padding: 12px 16px; margin: 0 0 10px; }
+  li a { font-weight: 600; }
+  .trick { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; background: #e6f4f1; color: #0f5e57; font: 12px/1.6 ui-monospace, monospace; }
+  li p { margin: 4px 0 0; color: #5b6472; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="../">&larr; Back to the demo</a></p>
+  <h1>Example pages</h1>
+  <p>
+    Made-up pages, each with exactly one piece of text hidden from you but readable by an AI agent.
+    Install CloakScan, open one, and click Scan. The tag says which trick to expect; try to spot it
+    yourself first.
+  </p>
+  <!-- One <li> per page, newest first. tests/examples.test.js checks this list against the folder. -->
+  <ul id="examples">
+    <li>
+      <a href="lentil-soup-recipe.html">Weeknight lentil soup</a><span class="trick">offscreen</span>
+      <p>A recipe blog post. Somewhere off the edge of the page, the cooking time gets rewritten.</p>
+    </li>
+  </ul>
+</main>
+</body>
+</html>
