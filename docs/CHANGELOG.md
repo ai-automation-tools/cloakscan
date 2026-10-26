@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- `docs/UPSTREAMS.md` lists what CloakScan assumes about the Chrome extension platform, Playwright, Node, ESLint and GitHub Pages and Actions, and `.github/dependabot.yml` opens weekly grouped minor and patch updates for npm and GitHub Actions (majors ignored). The biweekly upstream check works from the list.
 - Live demo at `https://ai-automation-tools.dev/cloakscan/`: `.github/workflows/pages.yml` publishes `src/` through `actions/deploy-pages` on every push to `main`. The demo carries the org source bar across the very top (a demo note, and View source linking this repo); the theme switch sits under it. `tests/demo-theme.test.js` checks the bar comes first and links the repo. The README hero gains a Live Demo badge and nav link. *Public release*
 - `.github/workflows/ci.yml` runs `npm ci`, lint, the tests (with headless Chromium) and the build on every PR and every push to `main`, with read-only `contents` permission.
 - `SECURITY.md`: report vulnerabilities through GitHub's private advisories, and what counts as one. A full-history `gitleaks` scan came back clean. *Public release*
