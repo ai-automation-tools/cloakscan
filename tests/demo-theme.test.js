@@ -13,6 +13,12 @@ test("demo pre-paint theme script and script.js share a key and a default", () =
   assert.match(script, /const DEFAULT_THEME = "light";/);
 });
 
+test("demo carries the org source bar first, linking the repo", () => {
+  const body = html.slice(html.indexOf("<body>") + 6).trimStart();
+  assert.ok(body.startsWith('<div class="src-bar">'), "source bar is the first element in <body>");
+  assert.match(body, /<a class="src-link" href="https:\/\/github\.com\/ai-automation-tools\/cloakscan"/);
+});
+
 test("demo theme switch is a Light then Dark button pair", () => {
   const group = html.match(/<div class="theme-toggle" role="group" aria-label="Theme">([\s\S]*?)<\/div>/);
   assert.ok(group, "theme switch group exists");

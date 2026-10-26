@@ -11,6 +11,8 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-tools.dev/cloakscan/">Live Demo</a>
+  ·
   <a href="docs/ROADMAP.md">Roadmap</a>
   ·
   <a href="https://github.com/ai-automation-tools/cloakscan/issues">Report Bug</a>
@@ -19,6 +21,7 @@
 </p>
 
 <p align="center">
+  <a href="https://ai-automation-tools.dev/cloakscan/"><img src="https://img.shields.io/badge/demo-live-0F766E?style=for-the-badge" alt="Live demo"></a>
   <img src="https://img.shields.io/badge/status-MVP_Prototype-F59E0B?style=for-the-badge" alt="Status: MVP prototype">
   <a href="docs/ROADMAP.md"><img src="https://img.shields.io/badge/plan-ROADMAP-8B5CF6?style=for-the-badge" alt="Roadmap"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f?style=for-the-badge" alt="License: MIT"></a>
@@ -35,8 +38,9 @@
 
 > [!WARNING]
 > **Not in the Chrome Web Store yet.** This is the working prototype, loadable unpacked.
-> The detectors are tested against a fixture page in headless Chromium; the public
-> demo is next on the [roadmap](docs/ROADMAP.md), then the store package.
+> The detectors are tested against a fixture page in headless Chromium. Try them in the
+> [live demo](https://ai-automation-tools.dev/cloakscan/); the store package is next on the
+> [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
 
