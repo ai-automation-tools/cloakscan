@@ -15,6 +15,9 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 ## Unreleased
 
+**Changed**
+- The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.
+
 **Added**
 - `docs/UPSTREAMS.md` lists what CloakScan assumes about the Chrome extension platform, Playwright, Node, ESLint and GitHub Pages and Actions, and `.github/dependabot.yml` opens weekly grouped minor and patch updates for npm and GitHub Actions (majors ignored). The biweekly upstream check works from the list.
 - Live demo at `https://ai-automation-tools.dev/cloakscan/`: `.github/workflows/pages.yml` publishes `src/` through `actions/deploy-pages` on every push to `main`. The demo carries the org source bar across the very top (a demo note, and View source linking this repo); the theme switch sits under it. `tests/demo-theme.test.js` checks the bar comes first and links the repo. The README hero gains a Live Demo badge and nav link. *Public release*
