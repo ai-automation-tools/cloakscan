@@ -14,7 +14,7 @@
 | Path | What it is |
 |:---|:---|
 | [**🧩 extension/**](extension/manifest.json) | The unpacked extension. `popup.js` runs the scan by injecting `content.js` into the active tab; `content.js` holds the six detectors and draws the outlines. `icons/` is the 16/32/48/128 px toolbar icon set, drawn by `scripts/icons.js`. |
-| [**🖥️ index.html**](index.html) | The demo: a fake browser window around a fabricated review article with six pieces of hidden text planted in it. Opens straight from `file://`. |
+| [**🖥️ index.html**](index.html) | The demo: a fake browser window around a fabricated review article with six pieces of hidden text planted in it. Opens straight from `file://`, and `.github/workflows/pages.yml` publishes this folder to GitHub Pages. The org source bar sits across the top. |
 | [**script.js**](script.js) | Demo harness only. Loads the demo data (the only `fetch` in `src/`, kept out of `extension/`), mounts the popup, fakes the outlining `content.js` would do on a real tab, and runs the light/dark switch (stored as `cloakscan.theme`). |
 | [**sample-data.json**](sample-data.json) | The demo article and its expected scan result. `index.html` carries an inline copy for browsers that block `fetch` on `file://`. |
 | [**style.css**](style.css) | Demo page styles, light and dark. The popup's own styles are in `extension/popup.css`; the demo's dark overrides for its popup panel live here, so the shipped popup is untouched. |
