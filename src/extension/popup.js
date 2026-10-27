@@ -46,7 +46,7 @@ function initCloakScanPopup(root = document) {
     findings.forEach((f) => {
       const li = document.createElement("li");
       li.className = `cs-finding confidence-${f.confidence}`;
-      li.innerHTML = `<span class="cs-tag">${LABELS[f.type] || f.type}</span><p>"${escapeHtml(f.snippet)}"</p>`;
+      li.innerHTML = `<span class="cs-tag">${escapeHtml(LABELS[f.type] || f.type)}</span><p>"${escapeHtml(f.snippet)}"</p>`;
       listEl.appendChild(li);
     });
 
