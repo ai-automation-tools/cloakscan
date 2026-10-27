@@ -15,6 +15,9 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 ## Unreleased
 
+**Security**
+- The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
+
 **Changed**
 - The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.
 
