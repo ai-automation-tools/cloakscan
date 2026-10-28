@@ -69,10 +69,10 @@ background script, and nothing leaves your browser.
 ## 🚀 Quick start
 
 ```bash
-# 1. Install dev dependencies (Node 22 or newer)
+# 1. Install dev dependencies (Node 22.2 or newer)
 npm install
 
-# 2. Copy the extension into dist/extension/
+# 2. Copy the extension into dist/extension/ and zip it into dist/cloakscan-<version>.zip for the store
 npm run build
 
 # 3. In Chrome: chrome://extensions, turn on Developer mode, Load unpacked, pick dist/extension/
@@ -91,7 +91,7 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, and the product spec and build plan. |
-| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. |
+| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. |
 | [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
