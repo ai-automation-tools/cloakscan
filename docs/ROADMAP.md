@@ -52,7 +52,7 @@ Nothing below blocks go-live.
 
 ### 🧩 Listing and launch (Slices 3 to 5)
 
-- [ ] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency.
+- [x] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency. — done 2026-10-27: `scripts/build.js` writes `dist/cloakscan-0.1.0.zip` (9 files, `manifest.json` at the root) with Node's `zlib`; `tests/package.test.js` checks the file list and each file's bytes, and Python's `zipfile.testzip()` reads it clean
 - [ ] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write.
 - [ ] Register the org's Chrome Web Store developer account ($5 one-time, per ADR-001; not Mike's personal account). 🔒 Needs Mike
 - [ ] Submit the listing using `docs/store/` and see it through review. 🔒 Needs Mike
