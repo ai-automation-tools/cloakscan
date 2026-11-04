@@ -50,6 +50,11 @@ public at the MVP, and the listing work follows before Mike submits.
 
 Nothing below blocks go-live.
 
+### 🔧 Upkeep
+
+- [ ] **Move the workflows to the current Actions majors.** Bump `actions/checkout@v4` to `v7`, `actions/setup-node@v4` to `v7`, `actions/configure-pages@v5` to `v6`, `actions/upload-pages-artifact@v3` to `v5` and `actions/deploy-pages@v4` to `v5` in `.github/workflows/ci.yml` and `pages.yml`. Why: all five have newer majors as of 2026-10-30, and `deploy-pages` v5 and `configure-pages` v6 move their runtime to Node 24 (https://github.com/actions/deploy-pages/releases, https://github.com/actions/configure-pages/releases, https://github.com/actions/setup-node/releases, https://github.com/actions/checkout/releases, https://github.com/actions/upload-pages-artifact/releases). Touches a hold path (`.github/workflows/`), so the PR waits for Mike. Done when CI is green on the PR and the Pages deploy still publishes `src/`. 🔒 Needs Mike
+- [ ] `small` **Try ESLint 10.** Bump `eslint` and `@eslint/js` from `^9.39.5` to the 10.x line in `package.json`, and fix whatever `eslint.config.js` or the code trips on. Why: ESLint 10.0.0 (2026-02-06) removed eslintrc support, updated `eslint:recommended` and requires Node `^20.19.0 || ^22.13.0 || >=24`; 10.14.0 is current (https://github.com/eslint/eslint/releases/tag/v10.0.0). Done when `npm run lint`, `npm test` and `npm run build` pass; if the Node 22 pin in CI is below 22.13, raise it.
+
 ### 🧩 Listing and launch (Slices 3 to 5)
 
 - [x] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency. — done 2026-10-27: `scripts/build.js` writes `dist/cloakscan-0.1.0.zip` (9 files, `manifest.json` at the root) with Node's `zlib`; `tests/package.test.js` checks the file list and each file's bytes, and Python's `zipfile.testzip()` reads it clean
