@@ -34,10 +34,12 @@ Full spec: `docs/product/spec.md`. Slice order: `docs/product/build-plan.md`. Wo
 - `scripts/build.js` copies `src/extension/` to `dist/extension/` and zips it into
   `dist/cloakscan-<version>.zip` (a hand-written deflate zip, no dependency) for the store.
   `scripts/icons.js` redraws the committed PNGs in `src/extension/icons/`; run it by hand only when the icon changes.
+  `scripts/store-screenshots.js` retakes the store screenshots in `docs/store/` from the demo;
+  run it by hand when the popup or the demo changes.
 - Tests: `node:test` and `node:assert/strict`, files in `tests/*.test.js`. The detectors
   need real layout, so detection tests run in headless Chromium through Playwright, not
   jsdom. No Jest, no Vitest.
-- Lint: ESLint 9 flat config. `src/**` is browser + webextensions script code;
+- Lint: ESLint 10 flat config. `src/**` is browser + webextensions script code;
   `scripts/`, `tests/` and the config are Node ESM.
 
 ## Verify

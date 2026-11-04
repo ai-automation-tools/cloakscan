@@ -26,8 +26,8 @@ source. `—` means never checked.
 | Upstream | What the code assumes | Code | Check at | Last checked |
 |:---|:---|:---|:---|:---|
 | **Playwright + headless Chromium** | `playwright` `^1.64.1` as a dev dependency; `tests/detection.test.js` drives `chromium` with real layout; CI runs `npx playwright install --with-deps chromium` | `package.json`, `tests/detection.test.js`, `.github/workflows/ci.yml` | github.com/microsoft/playwright/releases; playwright.dev/docs/release-notes | 2026-10-30 |
-| **Node.js** | `engines.node: ">=22"`; CI pins Node 22; tests run on `node --test` | `package.json`, `.github/workflows/ci.yml` | nodejs.org/en/about/previous-releases; raw.githubusercontent.com/nodejs/Release/main/schedule.json | 2026-10-30 |
-| **ESLint 9 (flat config) + `globals`** | `eslint` and `@eslint/js` `^9.39.5`, `globals` `^17.13.0`, config in `eslint.config.js` | `package.json`, `eslint.config.js` | eslint.org/blog; github.com/eslint/eslint/releases | 2026-10-30 |
+| **Node.js** | `engines.node: ">=22.13"` (ESLint 10 needs 22.13; `zlib.crc32` needs 22.2); CI pins Node 22, which resolves to the latest 22.x; tests run on `node --test` | `package.json`, `.github/workflows/ci.yml` | nodejs.org/en/about/previous-releases; raw.githubusercontent.com/nodejs/Release/main/schedule.json | 2026-10-30 |
+| **ESLint 10 (flat config) + `globals`** | `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`, `globals` `^17.13.0`, config in `eslint.config.js` | `package.json`, `eslint.config.js` | eslint.org/blog; github.com/eslint/eslint/releases | 2026-10-30 |
 
 ## Hosting and CI
 
