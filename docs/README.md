@@ -27,6 +27,12 @@
 |:---|:---|
 | [**📦 product/**](product/README.md) | The v1 spec with its Won't list, and the five-slice build plan where the launch is the actual experiment. |
 
+## 🧩 Chrome Web Store
+
+| Document | What's inside |
+|:---|:---|
+| [**🧩 store/**](store/README.md) | The submission kit: listing copy, single-purpose statement, permission justifications, privacy-practices answers and two 1280x800 screenshots, ready to paste into the developer dashboard. |
+
 ## ⚖️ Decisions
 
 | Document | What's inside |

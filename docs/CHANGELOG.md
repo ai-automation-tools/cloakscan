@@ -19,10 +19,12 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
 
 **Changed**
+- ESLint 10: `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`. Its new `no-useless-assignment` rule removed a dead `ok = false` in `popup.js`. `engines.node` is now `>=22.13`, ESLint 10's floor. *Upkeep*
 - `docs/UPSTREAMS.md` rows checked 2026-10-30; the Playwright and `globals` versions it states now match `package.json`. Two upkeep items queued on the roadmap: the Actions majors and ESLint 10.
 - The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.
 
 **Added**
+- Chrome Web Store submission kit in `docs/store/`: name, summary and description, category, single-purpose statement, a justification for each of the three permissions, the privacy-practices answers (no remote code, no data collected), the policy URL, and two 1280x800 screenshots of the demo. `scripts/store-screenshots.js` retakes the screenshots; `tests/store-kit.test.js` checks the summary matches the manifest, every permission is justified and the screenshots are 1280x800. The manifest `description`, which the store shows as the summary, drops "and instructions" to fit the store's 132-character limit (it was 137). *Listing and launch*
 - `npm run build` also writes `dist/cloakscan-<version>.zip` for the Chrome Web Store: the extension's files only, `manifest.json` at the root, zipped by `scripts/build.js` with Node's own `zlib` (no new dependency) and byte-identical from one build to the next. `tests/package.test.js` runs the build and checks the zip lists exactly the files in `src/extension/` and unpacks each to its source bytes. Node 22.2 or newer, for `zlib.crc32`. *Listing and launch*
 - Example pages at `src/examples/`: made-up articles with one hidden-text trick each, for trying the installed extension on a real page, plus a gallery linked from the demo. The first is a lentil soup recipe with an off-screen instruction. `tests/examples.test.js` scans each page in headless Chromium and checks it returns exactly the one finding its `cloakscan-example` meta names, and that the gallery lists every page. A weekly content job adds a page.
 - Example page `src/examples/harbour-lane-flat-listing.html`: a made-up rental listing with an instruction hidden in an HTML comment (`html-comment`).
