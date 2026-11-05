@@ -76,6 +76,7 @@ Nothing below blocks go-live.
 
 ### 🔭 Later
 
+- [ ] **Findings in the Agent Security Suite format.** An "Export findings" action that saves the current page's hits as a document valid against the suite's [agent inventory schema v0.1](https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json) (vendored to `schemas/`, never edited): an empty `identities` array and one `findings[]` entry per hit, `ruleId` `cloakscan/<technique>`, severity, the page URL and hidden text as evidence. A test validates the export against the schema. Why: lets prompt-injection findings sit in the same report as the suite's identity findings. Optional; after the store listing.
 - [ ] Firefox build from the same source, loaded as a temporary add-on and passing the same fixture test. (A Should from the spec.)
 - [ ] A shareable "page hygiene" report for teams auditing their own pages. Needs its own scoping note first, since a link implies hosting. (A Should from the spec.)
 
