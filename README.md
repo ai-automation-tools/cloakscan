@@ -39,7 +39,8 @@
 > [!WARNING]
 > **Not in the Chrome Web Store yet.** This is the working prototype, loadable unpacked.
 > The detectors are tested against a fixture page in headless Chromium. Try them in the
-> [live demo](https://cloakscan-demo.ai-automation-tools.dev/); the store package is next on the
+> [live demo](https://cloakscan-demo.ai-automation-tools.dev/). The store package and the
+> [listing kit](docs/store/README.md) are ready; the submission is next on the
 > [roadmap](docs/ROADMAP.md).
 
 ## 💡 What it's for
@@ -69,7 +70,7 @@ background script, and nothing leaves your browser.
 ## 🚀 Quick start
 
 ```bash
-# 1. Install dev dependencies (Node 22.2 or newer)
+# 1. Install dev dependencies (Node 22.13 or newer)
 npm install
 
 # 2. Copy the extension into dist/extension/ and zip it into dist/cloakscan-<version>.zip for the store
@@ -90,8 +91,8 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 | Folder | What's inside |
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
-| [**📚 docs/**](docs/README.md) | The roadmap, the changelog, and the product spec and build plan. |
-| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. |
+| [**📚 docs/**](docs/README.md) | The roadmap, the changelog, the product spec and build plan, and the Chrome Web Store kit. |
+| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. `store-kit.test.js` checks the store kit's summary matches the manifest, every permission has a justification, and the screenshots are 1280x800. |
 | [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
