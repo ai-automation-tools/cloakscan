@@ -13,7 +13,7 @@
 ---
 
 The CloakScan Weekly Roadmap routine works this file top to bottom every Tuesday, Thursday and Saturday:
-it takes the first open item that isn't `🔒 Needs Mike` (or up to six `small` ones), builds
+it takes the first open item that isn't `🔒 Needs owner` (or up to six `small` ones), builds
 it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above `## After public
 release` is a release gate.** CloakScan goes public when all of them are ticked and Mike
 says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates any doc
@@ -21,7 +21,7 @@ it made stale, in the same commit.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
 (the reason follows on the line). `small` marks docs or config a run can batch, up to six
-per PR (untagged means a feature, one per run); `🔒 Needs Mike` marks one only Mike can do.
+per PR (untagged means a feature, one per run); `🔒 Needs owner` marks one only the owner can do.
 
 The slices come from [product/build-plan.md](product/build-plan.md). Slice 0, the
 prototype, is already in `src/`. The Chrome Web Store listing (Slice 3) and the launch
@@ -52,30 +52,31 @@ Nothing below blocks go-live.
 
 ### 🔧 Upkeep
 
-- [ ] **Move the workflows to the current Actions majors.** Bump `actions/checkout@v4` to `v7`, `actions/setup-node@v4` to `v7`, `actions/configure-pages@v5` to `v6`, `actions/upload-pages-artifact@v3` to `v5` and `actions/deploy-pages@v4` to `v5` in `.github/workflows/ci.yml` and `pages.yml`. Why: all five have newer majors as of 2026-10-30, and `deploy-pages` v5 and `configure-pages` v6 move their runtime to Node 24 (https://github.com/actions/deploy-pages/releases, https://github.com/actions/configure-pages/releases, https://github.com/actions/setup-node/releases, https://github.com/actions/checkout/releases, https://github.com/actions/upload-pages-artifact/releases). Touches a hold path (`.github/workflows/`), so the PR waits for Mike. Done when CI is green on the PR and the Pages deploy still publishes `src/`. 🔒 Needs Mike
+- [ ] **Move the workflows to the current Actions majors.** Bump `actions/checkout@v4` to `v7`, `actions/setup-node@v4` to `v7`, `actions/configure-pages@v5` to `v6`, `actions/upload-pages-artifact@v3` to `v5` and `actions/deploy-pages@v4` to `v5` in `.github/workflows/ci.yml` and `pages.yml`. Why: all five have newer majors as of 2026-10-30, and `deploy-pages` v5 and `configure-pages` v6 move their runtime to Node 24 (https://github.com/actions/deploy-pages/releases, https://github.com/actions/configure-pages/releases, https://github.com/actions/setup-node/releases, https://github.com/actions/checkout/releases, https://github.com/actions/upload-pages-artifact/releases). Touches a hold path (`.github/workflows/`), so the PR waits for Mike. Done when CI is green on the PR and the Pages deploy still publishes `src/`. 🔒 Needs owner
 - [x] `small` **Try ESLint 10.** Bump `eslint` and `@eslint/js` from `^9.39.5` to the 10.x line in `package.json`, and fix whatever `eslint.config.js` or the code trips on. Why: ESLint 10.0.0 (2026-02-06) removed eslintrc support, updated `eslint:recommended` and requires Node `^20.19.0 || ^22.13.0 || >=24`; 10.14.0 is current (https://github.com/eslint/eslint/releases/tag/v10.0.0). Done when `npm run lint`, `npm test` and `npm run build` pass; if the Node 22 pin in CI is below 22.13, raise it. — done 2026-11-03: `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`; the new `no-useless-assignment` rule caught one dead `ok = false` in `popup.js`; `engines.node` raised to `>=22.13`, and CI's `node-version: 22` already resolves to the latest 22.x
 
 ### 🧩 Listing and launch (Slices 3 to 5)
 
 - [x] **Store-ready package.** `npm run build` also writes `dist/cloakscan-<version>.zip` holding only the extension's files, with `manifest.json` at the zip root. A test checks the file list. No new runtime dependency. — done 2026-10-27: `scripts/build.js` writes `dist/cloakscan-0.1.0.zip` (9 files, `manifest.json` at the root) with Node's `zlib`; `tests/package.test.js` checks the file list and each file's bytes, and Python's `zipfile.testzip()` reads it clean
 - [x] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write. — done 2026-11-03: [`docs/store/README.md`](store/README.md) has every field in dashboard order and two 1280x800 demo screenshots, retaken by `scripts/store-screenshots.js`; `tests/store-kit.test.js` holds the summary to the manifest, the justifications to the permission list and the screenshots to 1280x800
-- [ ] Register the org's Chrome Web Store developer account ($5 one-time, per ADR-001; not Mike's personal account). 🔒 Needs Mike
-- [ ] Submit the listing using `docs/store/` and see it through review. 🔒 Needs Mike
+- [ ] Register the org's Chrome Web Store developer account ($5 one-time, per ADR-001; not Mike's personal account). 🔒 Needs owner
+- [ ] Submit the listing using `docs/store/` and see it through review. 🔒 Needs owner
 - [ ] Once the listing is live: an "Install from Chrome Web Store" badge in the README hero, and the org front door links the listing instead of the demo alone.
-- [ ] Pick the launch channel (Show HN, dev.to, r/artificial, or the front door only) and publish one launch post with a real before/after scan. 🔒 Needs Mike
+- [ ] Pick the launch channel (Show HN, dev.to, r/artificial, or the front door only) and publish one launch post with a real before/after scan. 🔒 Needs owner
 - [ ] Slice 5, post-launch fixes: triage every issue opened in the first four weeks after launch, and fix the ones that block normal use.
-- [ ] 2027-03-22 check against the decision memo: under 100 installs despite a real launch means the distribution bet failed, and the ledger row moves to `rejected`. 🔒 Needs Mike
+- [ ] 2027-03-22 check against the decision memo: under 100 installs despite a real launch means the distribution bet failed, and the ledger row moves to `rejected`. 🔒 Needs owner
 
 ### 📣 Publish and promote
 
-- [ ] Custom subdomain `cloakscan.ai-automation-tools.dev`. 🔒 Needs Mike
+- [ ] Custom subdomain `cloakscan.ai-automation-tools.dev`. 🔒 Needs owner
 
 ### 💰 Revenue
 
-- [ ] Decide whether continuous scanning as a paid tier is worth scoping. Only if the 2027-03-22 check passes, and with its own ADR. 🔒 Needs Mike
+- [ ] Decide whether continuous scanning as a paid tier is worth scoping. Only if the 2027-03-22 check passes, and with its own ADR. 🔒 Needs owner
 
 ### 🔭 Later
 
+- [ ] **Findings in the Agent Security Suite format.** An "Export findings" action that saves the current page's hits as a document valid against the suite's [agent inventory schema v0.1](https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json) (vendored to `schemas/`, never edited): an empty `identities` array and one `findings[]` entry per hit, `ruleId` `cloakscan/<technique>`, severity, the page URL and hidden text as evidence. A test validates the export against the schema. Why: lets prompt-injection findings sit in the same report as the suite's identity findings. Optional; after the store listing.
 - [ ] Firefox build from the same source, loaded as a temporary add-on and passing the same fixture test. (A Should from the spec.)
 - [ ] A shareable "page hygiene" report for teams auditing their own pages. Needs its own scoping note first, since a link implies hosting. (A Should from the spec.)
 
