@@ -20,6 +20,7 @@
 |:---|:---|
 | [**🗺️ ROADMAP.md**](ROADMAP.md) | The release gates, one per weekly run, then the listing and launch work that waits until the repo is public. |
 | [**📋 CHANGELOG.md**](CHANGELOG.md) | Every change, newest first. Roadmap items show up here the week they're ticked. |
+| [**🔗 UPSTREAMS.md**](UPSTREAMS.md) | Every platform and tool CloakScan depends on, what the code assumes about each, and where to check it. |
 
 ## 📦 Product
 
