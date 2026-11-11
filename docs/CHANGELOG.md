@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Docs**
+- The README gains a related repositories table that links GhostGrant, the org's other agent-security tool.
 - `docs/README.md` links `docs/UPSTREAMS.md`, which no index reached before.
 
 **Security**

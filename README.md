@@ -101,6 +101,13 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
 | [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. `CLAUDE.md` imports it for Claude Code. |
 
+## 🔗 Related repositories
+
+| Repo | How it relates |
+|:---|:---|
+| [**ai-automation-tools**](https://github.com/ai-automation-tools) | The org this lives in. Its other tools are listed on the profile page. |
+| [**GhostGrant**](https://github.com/ai-automation-tools/ghost-grant) | Another agent-security tool in the org. CloakScan checks the pages a live agent reads for hidden instructions; GhostGrant checks that a retired agent's credentials stopped working. |
+
 ---
 
 <p align="center">
