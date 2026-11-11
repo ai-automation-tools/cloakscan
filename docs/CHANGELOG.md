@@ -16,6 +16,8 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Docs**
+- Roadmap rechecked against the org's 2026-11 requirements. The intro names the routine instead of its days and the badges say public. The Upkeep group becomes Charter and upkeep: Responsible use first, the Actions-majors move (now workable by the routine, its PR still held for review), clearing Dependabot #1, and keeping less page text in storage.
+- Custom subdomain ticked: since graduation the homepage serves at `https://cloakscan.ai-automation-tools.dev/` (cloakscan-site) and the demo at `https://cloakscan-demo.ai-automation-tools.dev/`. *Publish and promote*
 - The README gains a related repositories table that links GhostGrant, the org's other agent-security tool.
 - `docs/README.md` links `docs/UPSTREAMS.md`, which no index reached before.
 
