@@ -111,6 +111,7 @@ async function main() {
     <p id="cs-summary" class="cs-summary"></p>
     <ul id="cs-findings" class="cs-findings"></ul>
     <button id="cs-copy-btn" class="cs-copy-btn" type="button" disabled>Copy visible-only text</button>
+    <button id="cs-export-btn" class="cs-copy-btn cs-export-btn" type="button" disabled>Export findings (JSON)</button>
     <p class="cs-footnote">Scans only when you click, only this tab. Nothing leaves your browser.</p>
   `;
 
