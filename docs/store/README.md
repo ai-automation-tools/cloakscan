@@ -56,7 +56,7 @@ What it looks for:
 - HTML comments addressed to an AI model or trying to override one
 - Zero-width characters tucked inside ordinary text
 
-"Copy visible-only text" copies the page with every flagged part removed, so what you paste into a chatbot is only what you actually saw.
+"Copy visible-only text" copies the page with every flagged part removed, so what you paste into a chatbot is only what you actually saw. "Export findings (JSON)" saves the findings to a file on your device.
 
 Private by design:
 - It runs only when you click it, and only on that tab.

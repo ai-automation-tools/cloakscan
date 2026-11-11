@@ -11,9 +11,30 @@ const LABELS = {
   "zero-width": "Zero-width characters",
 };
 
+// A scan result as an Agent Security Suite inventory document (schemas/agent-inventory/v0.1.json).
+// CloakScan finds no identities, so `identities` stays empty and each hit is filed against the page.
+function toInventory(result, version) {
+  return {
+    schemaVersion: "0.1",
+    generatedAt: result.scannedAt,
+    producer: { name: "cloakscan", version, url: "https://github.com/ai-automation-tools/cloakscan" },
+    identities: [],
+    findings: result.findings.map((f, i) => ({
+      id: `cloakscan-${i + 1}`,
+      identityId: result.url,
+      ruleId: `cloakscan/${f.type}`,
+      severity: f.confidence === "high" ? "high" : "medium",
+      title: LABELS[f.type] || f.type,
+      evidence: `Hidden text on ${result.url}: "${f.snippet}"`,
+      references: [result.url],
+    })),
+  };
+}
+
 function initCloakScanPopup(root = document) {
   const scanBtn = root.getElementById("cs-scan-btn");
   const copyBtn = root.getElementById("cs-copy-btn");
+  const exportBtn = root.getElementById("cs-export-btn");
   const statusEl = root.getElementById("cs-status");
   const summaryEl = root.getElementById("cs-summary");
   const listEl = root.getElementById("cs-findings");
@@ -51,6 +72,7 @@ function initCloakScanPopup(root = document) {
     });
 
     copyBtn.disabled = !result.cleanedText;
+    exportBtn.disabled = false;
     statusEl.textContent = `Scanned at ${new Date(result.scannedAt).toLocaleTimeString()}`;
   }
 
@@ -119,6 +141,18 @@ function initCloakScanPopup(root = document) {
     const original = copyBtn.textContent;
     copyBtn.textContent = ok ? "Copied" : "Copy failed — select manually";
     setTimeout(() => { copyBtn.textContent = original; }, 1200);
+  });
+
+  // Saved as a local download from a blob: URL, so no network and no `downloads` permission.
+  exportBtn.addEventListener("click", () => {
+    if (!lastResult) return;
+    const version = inExtension ? chrome.runtime.getManifest().version : "demo";
+    const json = JSON.stringify(toInventory(lastResult, version), null, 2);
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([json], { type: "application/json" }));
+    link.download = `cloakscan-findings-${lastResult.scannedAt.slice(0, 10)}.json`;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 1000);
   });
 
   if (inExtension) {
