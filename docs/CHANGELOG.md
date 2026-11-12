@@ -16,6 +16,10 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Docs**
+- `docs/README.md` records that CloakScan has no architecture diagram, by choice: the detector flow is simple.
+- Roadmap rechecked against the org's 2026-11 requirements. The intro names the routine instead of its days and the badges say public. The Upkeep group becomes Charter and upkeep: Responsible use first, the Actions-majors move (now workable by the routine, its PR still held for review), clearing Dependabot #1, and keeping less page text in storage.
+- Custom subdomain ticked: since graduation the homepage serves at `https://cloakscan.ai-automation-tools.dev/` (cloakscan-site) and the demo at `https://cloakscan-demo.ai-automation-tools.dev/`. *Publish and promote*
+- The README gains a related repositories table that links GhostGrant, the org's other agent-security tool.
 - `docs/README.md` links `docs/UPSTREAMS.md`, which no index reached before.
 
 **Security**
@@ -27,6 +31,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.
 
 **Added**
+- **Export findings (JSON)** in the popup, extension and demo alike: saves the scan as an Agent Security Suite inventory document (`schemas/agent-inventory/v0.1.json`, vendored unedited), with an empty `identities` array and one finding per hit (`ruleId` `cloakscan/<technique>`, severity from the detector's confidence, the page URL and hidden text as evidence). A local `blob:` download, so no network and no new permission. `tests/export.test.js` validates the export against the schema. *Later*
 - Example page `src/examples/dispatch-coordinator-job-ad.html`: a made-up job ad with one near-white line of text on a white page (`color-match`), listed first in the example gallery. *Content*
 - Chrome Web Store submission kit in `docs/store/`: name, summary and description, category, single-purpose statement, a justification for each of the three permissions, the privacy-practices answers (no remote code, no data collected), the policy URL, and two 1280x800 screenshots of the demo. `scripts/store-screenshots.js` retakes the screenshots; `tests/store-kit.test.js` checks the summary matches the manifest, every permission is justified and the screenshots are 1280x800. The manifest `description`, which the store shows as the summary, drops "and instructions" to fit the store's 132-character limit (it was 137). *Listing and launch*
 - `npm run build` also writes `dist/cloakscan-<version>.zip` for the Chrome Web Store: the extension's files only, `manifest.json` at the root, zipped by `scripts/build.js` with Node's own `zlib` (no new dependency) and byte-identical from one build to the next. `tests/package.test.js` runs the build and checks the zip lists exactly the files in `src/extension/` and unpacks each to its source bytes. Node 22.2 or newer, for `zlib.crc32`. *Listing and launch*

@@ -1,23 +1,23 @@
 <h1 align="center">🗺️ Roadmap</h1>
 
 <p align="center">
-  <em>Everything between a working prototype and a public, demoable CloakScan, in the order it has to happen.</em>
+  <em>From a public, demoable CloakScan to a Chrome Web Store listing, a launch and a Firefox build.</em>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/now-public_release-F59E0B?style=for-the-badge" alt="Now: public release">
-  <img src="https://img.shields.io/badge/stage-incubating-2ea44f?style=for-the-badge" alt="Stage: incubating">
+  <img src="https://img.shields.io/badge/now-listing_and_launch-F59E0B?style=for-the-badge" alt="Now: listing and launch">
+  <img src="https://img.shields.io/badge/stage-public_since_2026--10--26-2ea44f?style=for-the-badge" alt="Stage: public since 2026-10-26">
   <a href="README.md"><img src="https://img.shields.io/badge/↩-docs_home-6B7280?style=for-the-badge" alt="Back to docs"></a>
 </p>
 
 ---
 
-The CloakScan Weekly Roadmap routine works this file top to bottom every Tuesday, Thursday and Saturday:
-it takes the first open item that isn't `🔒 Needs owner` (or up to six `small` ones), builds
-it, ticks it and opens a `roadmap/auto-<date>` PR. **Every item above `## After public
-release` is a release gate.** CloakScan goes public when all of them are ticked and Mike
-says so. Ticking an item adds its line to the [changelog](CHANGELOG.md) and updates any doc
-it made stale, in the same commit.
+The CloakScan roadmap routine (`cloakscan-roadmap`) works this file top to bottom, one item per
+run, as `roadmap/auto-` PRs: it takes the first open item that isn't `🔒 Needs owner` (or up to
+six `small` ones), builds it and ticks it. **Every item above `## After public release` is a
+release gate;** all of them were ticked when CloakScan went public on 2026-10-26. Ticking an
+item adds its line to the [changelog](CHANGELOG.md) and updates any doc it made stale, in the
+same commit.
 
 Markers: `- [ ]` open, `- [-]` claimed by a run in progress, `- [x]` done, `- [!]` blocked
 (the reason follows on the line). `small` marks docs or config a run can batch, up to six
@@ -50,9 +50,12 @@ public at the MVP, and the listing work follows before Mike submits.
 
 Nothing below blocks go-live.
 
-### 🔧 Upkeep
+### 🛡️ Charter and upkeep
 
-- [ ] **Move the workflows to the current Actions majors.** Bump `actions/checkout@v4` to `v7`, `actions/setup-node@v4` to `v7`, `actions/configure-pages@v5` to `v6`, `actions/upload-pages-artifact@v3` to `v5` and `actions/deploy-pages@v4` to `v5` in `.github/workflows/ci.yml` and `pages.yml`. Why: all five have newer majors as of 2026-10-30, and `deploy-pages` v5 and `configure-pages` v6 move their runtime to Node 24 (https://github.com/actions/deploy-pages/releases, https://github.com/actions/configure-pages/releases, https://github.com/actions/setup-node/releases, https://github.com/actions/checkout/releases, https://github.com/actions/upload-pages-artifact/releases). Touches a hold path (`.github/workflows/`), so the PR waits for Mike. Done when CI is green on the PR and the Pages deploy still publishes `src/`. 🔒 Needs owner
+- [ ] `small` **Responsible use.** A README section: scan pages you're reading or own, CloakScan reports and never edits or blocks, findings can be false positives (ADR-003's known misses), and exported findings carry page text, so treat the file as you would the page.
+- [ ] `small` **Move the workflows to the current Actions majors.** Bump `actions/checkout@v4` to `v7`, `actions/setup-node@v4` to `v7`, `actions/configure-pages@v5` to `v6`, `actions/upload-pages-artifact@v3` to `v5` and `actions/deploy-pages@v4` to `v5` in `.github/workflows/ci.yml` and `pages.yml`. Why: all five have newer majors as of 2026-10-30, and `deploy-pages` v5 and `configure-pages` v6 move their runtime to Node 24 (https://github.com/actions/deploy-pages/releases, https://github.com/actions/configure-pages/releases, https://github.com/actions/setup-node/releases, https://github.com/actions/checkout/releases, https://github.com/actions/upload-pages-artifact/releases). Touches a hold path (`.github/workflows/`), so the PR waits for Mike. Done when CI is green on the PR and the Pages deploy still publishes `src/`.
+- [ ] `small` **Clear Dependabot #1.** `"overrides": { "minimatch": "^11.0.1" }` in `package.json` (dev-only, as ghost-grant #18 and diff-carve #18 did), `npm install`, lint, test and build green, and the alert closes.
+- [ ] `small` **Keep less page text.** Store the last scan's findings with snippets capped (or none) and clear it when the tab closes; `PRIVACY.md` updated; a test checks what's stored. Why: the security sweep (2026-11-10) flagged page text kept in `chrome.storage.local`.
 - [x] `small` **Try ESLint 10.** Bump `eslint` and `@eslint/js` from `^9.39.5` to the 10.x line in `package.json`, and fix whatever `eslint.config.js` or the code trips on. Why: ESLint 10.0.0 (2026-02-06) removed eslintrc support, updated `eslint:recommended` and requires Node `^20.19.0 || ^22.13.0 || >=24`; 10.14.0 is current (https://github.com/eslint/eslint/releases/tag/v10.0.0). Done when `npm run lint`, `npm test` and `npm run build` pass; if the Node 22 pin in CI is below 22.13, raise it. — done 2026-11-03: `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`; the new `no-useless-assignment` rule caught one dead `ok = false` in `popup.js`; `engines.node` raised to `>=22.13`, and CI's `node-version: 22` already resolves to the latest 22.x
 
 ### 🧩 Listing and launch (Slices 3 to 5)
@@ -61,6 +64,7 @@ Nothing below blocks go-live.
 - [x] `small` **Chrome Web Store submission kit.** `docs/store/` holds the listing copy (short and long description), the single-purpose statement, a justification for each of the three permissions, answers to the privacy-practices form, and at least two 1280x800 screenshots taken from the demo. Everything Mike has to paste into the developer dashboard, and nothing he has to write. — done 2026-11-03: [`docs/store/README.md`](store/README.md) has every field in dashboard order and two 1280x800 demo screenshots, retaken by `scripts/store-screenshots.js`; `tests/store-kit.test.js` holds the summary to the manifest, the justifications to the permission list and the screenshots to 1280x800
 - [ ] Register the org's Chrome Web Store developer account ($5 one-time, per ADR-001; not Mike's personal account). 🔒 Needs owner
 - [ ] Submit the listing using `docs/store/` and see it through review. 🔒 Needs owner
+- [ ] **Stamp the demo build** *(Homepage refresh, 2026-11-09)* — **What:** add a `<meta name="build" content="<sha>">` tag to the demo's page, set to the commit SHA at deploy time, as Incubate's boilerplate does. `Get-SurfaceDrift.py` finds no build stamp on https://cloakscan-demo.ai-automation-tools.dev/, so a stale deploy can't be told from a current one. **Done when:** `Get-SurfaceDrift.py` shows the cloakscan demo `current` after a deploy.
 - [ ] Once the listing is live: an "Install from Chrome Web Store" badge in the README hero, and the org front door links the listing instead of the demo alone.
 - [ ] Pick the launch channel (Show HN, dev.to, r/artificial, or the front door only) and publish one launch post with a real before/after scan. 🔒 Needs owner
 - [ ] Slice 5, post-launch fixes: triage every issue opened in the first four weeks after launch, and fix the ones that block normal use.
@@ -68,7 +72,7 @@ Nothing below blocks go-live.
 
 ### 📣 Publish and promote
 
-- [ ] Custom subdomain `cloakscan.ai-automation-tools.dev`. 🔒 Needs owner
+- [x] Custom subdomain `cloakscan.ai-automation-tools.dev`. 🔒 Needs owner — done 2026-10-26 at graduation (cloakscan-site; demo on cloakscan-demo).
 
 ### 💰 Revenue
 
@@ -76,7 +80,7 @@ Nothing below blocks go-live.
 
 ### 🔭 Later
 
-- [ ] **Findings in the Agent Security Suite format.** An "Export findings" action that saves the current page's hits as a document valid against the suite's [agent inventory schema v0.1](https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json) (vendored to `schemas/`, never edited): an empty `identities` array and one `findings[]` entry per hit, `ruleId` `cloakscan/<technique>`, severity, the page URL and hidden text as evidence. A test validates the export against the schema. Why: lets prompt-injection findings sit in the same report as the suite's identity findings. Optional; after the store listing.
+- [x] **Findings in the Agent Security Suite format.** An "Export findings" action that saves the current page's hits as a document valid against the suite's [agent inventory schema v0.1](https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json) (vendored to `schemas/`, never edited): an empty `identities` array and one `findings[]` entry per hit, `ruleId` `cloakscan/<technique>`, severity, the page URL and hidden text as evidence. A test validates the export against the schema. Why: lets prompt-injection findings sit in the same report as the suite's identity findings. Optional; after the store listing. — done 2026-11-10: an "Export findings (JSON)" button in `src/extension/popup.js` (shared with the demo) downloads the document; schema vendored at `schemas/agent-inventory/v0.1.json`; `tests/export.test.js` validates a fixture scan, a clean page and the demo's download against it. Built ahead of the listing because every item above it is owner-only or waits on the listing
 - [ ] Firefox build from the same source, loaded as a temporary add-on and passing the same fixture test. (A Should from the spec.)
 - [ ] A shareable "page hygiene" report for teams auditing their own pages. Needs its own scoping note first, since a link implies hosting. (A Should from the spec.)
 

@@ -1,6 +1,6 @@
 # Privacy policy
 
-CloakScan, a Chrome extension published by ai-automation-tools. Last updated 2026-10-22.
+CloakScan, a Chrome extension published by ai-automation-tools. Last updated 2026-11-10.
 
 ## What it collects
 
@@ -25,7 +25,8 @@ deletes it.
 
 Nothing. The extension makes no network requests. When you click **Copy visible-only
 text**, the text goes to your clipboard and nowhere else; what you paste it into is up to
-you.
+you. When you click **Export findings (JSON)**, the findings are saved as a file through
+your browser's own download, on your device.
 
 ## Changes
 

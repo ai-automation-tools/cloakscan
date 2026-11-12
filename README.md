@@ -51,7 +51,9 @@ div parked 9,999 pixels off-screen, a 1px font, an HTML comment. Brave showed at
 doing exactly this to Perplexity's Comet. CloakScan reads the tab you're on, outlines each
 piece of hidden text on the page, and lists what it found in plain language. Then it can
 copy the page's visible text with the hidden parts stripped, so you paste only what you
-actually read.
+actually read. **Export findings (JSON)** saves the hits as a file in the
+[Agent Security Suite inventory format](schemas/agent-inventory/v0.1.json), so they can sit
+in the same report as the suite's other tools.
 
 It runs when you click it and at no other time. There's no `host_permissions` entry, no
 background script, and nothing leaves your browser.
@@ -92,11 +94,19 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, the product spec and build plan, and the Chrome Web Store kit. |
-| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. `store-kit.test.js` checks the store kit's summary matches the manifest, every permission has a justification, and the screenshots are 1280x800. |
+| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. `store-kit.test.js` checks the store kit's summary matches the manifest, every permission has a justification, and the screenshots are 1280x800. `export.test.js` validates the Export findings file, from a fixture scan and from the demo's download, against the vendored suite schema. |
+| [**📐 schemas/**](schemas/agent-inventory/v0.1.json) | The Agent Security Suite inventory schema v0.1, vendored unedited from `https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json`. The export follows it. |
 | [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
 | [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. `CLAUDE.md` imports it for Claude Code. |
+
+## 🔗 Related repositories
+
+| Repo | How it relates |
+|:---|:---|
+| [**ai-automation-tools**](https://github.com/ai-automation-tools) | The org this lives in. Its other tools are listed on the profile page. |
+| [**GhostGrant**](https://github.com/ai-automation-tools/ghost-grant) | Another agent-security tool in the org. CloakScan checks the pages a live agent reads for hidden instructions; GhostGrant checks that a retired agent's credentials stopped working. |
 
 ---
 

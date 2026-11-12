@@ -10,7 +10,9 @@ click Scan, and it outlines each finding on the page and lists it in plain langu
 detectors: color-matched text, off-screen positioning, shrunk-to-invisible sizing,
 aria-hidden elements with instruction-like phrasing, HTML comments with instruction-like
 phrasing, and zero-width Unicode. A "copy visible-only text" button strips the flagged
-content and copies the rest.
+content and copies the rest. "Export findings (JSON)" downloads the hits in the Agent
+Security Suite inventory format, vendored at `schemas/agent-inventory/v0.1.json` (never edit
+it; `tests/export.test.js` validates the export against it).
 
 The detection logic already works; it came over from the prototype. The bet under the
 project is distribution: whether the org's own channel can get this past the ~23 installs

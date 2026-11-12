@@ -40,6 +40,10 @@
 |:---|:---|
 | [**ADR-003: instruction phrasing**](decisions/adr-003-instruction-phrasing.md) | How the aria-hidden and comment checks decide text reads like an instruction, the options weighed, and what it misses on purpose. ADR-001 and ADR-002 stay in the private plan; `AGENTS.md` summarizes them. |
 
+## 🧭 Diagrams
+
+No architecture diagram, by choice. The detector flow is short (scan the page, run each check, list the findings), and [product/](product/README.md) and the code describe it well enough.
+
 <p align="right">(<a href="#docs-top">back to top</a>)</p>
 
 ---
