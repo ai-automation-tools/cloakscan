@@ -20,7 +20,7 @@ to you unless you'd rather stay anonymous.
 
 - The extension sending anything off the device, or loading remote code.
 - The extension gaining access to a tab without a click on its toolbar icon.
-- A page script reading or changing what CloakScan stores in `chrome.storage.local`.
+- A page script reading or changing what CloakScan stores in `chrome.storage.session`.
 - Markup that hides text from a person and from all six checks in a way the docs don't
   already list as a known miss. Known misses are in
   [ADR-003](docs/decisions/adr-003-instruction-phrasing.md).
