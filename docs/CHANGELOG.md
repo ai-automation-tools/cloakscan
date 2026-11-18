@@ -23,6 +23,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - `docs/README.md` links `docs/UPSTREAMS.md`, which no index reached before.
 
 **Security**
+- `minimatch` 11.0.1 or later through an npm `overrides` entry, which clears Dependabot #1 (GHSA-g3hv-75wg-m249). It is a dev-only dependency of ESLint, so the extension never shipped it; lint and tests pass on it (security sweep, 2026-11-17).
 - The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
 
 **Changed**
