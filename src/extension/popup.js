@@ -31,6 +31,22 @@ function toInventory(result, version) {
   };
 }
 
+// What the extension keeps between popup opens: the findings with snippets cut short, tied to
+// the tab and page they came from, and none of the page's visible text.
+const STORED_SNIPPET_CHARS = 60;
+function toStored(result, tabId) {
+  return {
+    tabId,
+    url: result.url,
+    scannedAt: result.scannedAt,
+    findings: result.findings.map(({ type, confidence, snippet }) => ({
+      type,
+      confidence,
+      snippet: snippet.length > STORED_SNIPPET_CHARS ? `${snippet.slice(0, STORED_SNIPPET_CHARS)}…` : snippet,
+    })),
+  };
+}
+
 function initCloakScanPopup(root = document) {
   const scanBtn = root.getElementById("cs-scan-btn");
   const copyBtn = root.getElementById("cs-copy-btn");
@@ -73,7 +89,8 @@ function initCloakScanPopup(root = document) {
 
     copyBtn.disabled = !result.cleanedText;
     exportBtn.disabled = false;
-    statusEl.textContent = `Scanned at ${new Date(result.scannedAt).toLocaleTimeString()}`;
+    statusEl.textContent = `Scanned at ${new Date(result.scannedAt).toLocaleTimeString()}`
+      + (result.cleanedText === undefined ? ". Scan again to copy the text." : "");
   }
 
   async function scanExtension() {
@@ -82,7 +99,8 @@ function initCloakScanPopup(root = document) {
       target: { tabId: tab.id },
       files: ["content.js"],
     });
-    await chrome.storage.local.set({ cloakscanLastResult: result });
+    // storage.session lives in memory: nothing is written to disk, and quitting Chrome clears it.
+    await chrome.storage.session.set({ cloakscanLastResult: toStored(result, tab.id) });
     render(result);
   }
 
@@ -156,8 +174,15 @@ function initCloakScanPopup(root = document) {
   });
 
   if (inExtension) {
-    chrome.storage.local.get("cloakscanLastResult").then(({ cloakscanLastResult }) => {
-      if (cloakscanLastResult) render(cloakscanLastResult);
+    // Show the last scan only on the tab and page it came from. Opened anywhere else (the tab
+    // closed, navigated away, or this is another tab), the popup drops it instead.
+    Promise.all([
+      chrome.storage.session.get("cloakscanLastResult"),
+      chrome.tabs.query({ active: true, currentWindow: true }),
+    ]).then(([{ cloakscanLastResult: saved }, [tab]]) => {
+      if (!saved) return;
+      if (saved.tabId === tab?.id && saved.url === tab?.url) render(saved);
+      else chrome.storage.session.remove("cloakscanLastResult");
     });
   }
 }

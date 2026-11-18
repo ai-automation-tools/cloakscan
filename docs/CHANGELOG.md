@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Docs**
+- A Responsible use section in the README: scan pages you read or own, CloakScan reports and never edits or blocks, findings can be false positives and ADR-003 lists what it misses, and an exported file quotes the page, so treat it like the page. *Charter and upkeep*
 - `docs/README.md` records that CloakScan has no architecture diagram, by choice: the detector flow is simple.
 - Roadmap rechecked against the org's 2026-11 requirements. The intro names the routine instead of its days and the badges say public. The Upkeep group becomes Charter and upkeep: Responsible use first, the Actions-majors move (now workable by the routine, its PR still held for review), clearing Dependabot #1, and keeping less page text in storage.
 - Custom subdomain ticked: since graduation the homepage serves at `https://cloakscan.ai-automation-tools.dev/` (cloakscan-site) and the demo at `https://cloakscan-demo.ai-automation-tools.dev/`. *Publish and promote*
@@ -23,9 +24,11 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - `docs/README.md` links `docs/UPSTREAMS.md`, which no index reached before.
 
 **Security**
+- The popup keeps less page text between opens. Each scan stores only the page address, the scan time and each finding's type with its first 60 characters, no visible page text, in `chrome.storage.session` instead of `chrome.storage.local`: held in memory, never on disk, cleared when Chrome quits. The popup shows the record again only on the tab and page it came from and drops it when opened anywhere else, so a closed tab's scan goes at the next popup open. A reopened popup can't copy until you scan again. `PRIVACY.md`, `SECURITY.md` and the store kit's storage justification say so; `tests/storage.test.js` checks what is stored and when it is dropped. *Charter and upkeep*
 - The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
 
 **Changed**
+- The workflows use the current Actions majors: `actions/checkout@v7` and `actions/setup-node@v7` in CI and Pages, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` in Pages. No inputs changed. `docs/UPSTREAMS.md` lists the new versions.
 - ESLint 10: `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`. Its new `no-useless-assignment` rule removed a dead `ok = false` in `popup.js`. `engines.node` is now `>=22.13`, ESLint 10's floor. *Upkeep*
 - `docs/UPSTREAMS.md` rows checked 2026-10-30; the Playwright and `globals` versions it states now match `package.json`. Two upkeep items queued on the roadmap: the Actions majors and ESLint 10.
 - The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.
