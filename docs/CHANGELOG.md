@@ -15,6 +15,9 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 ## Unreleased
 
+**Added**
+- Example page `src/examples/millrace-repair-cafe.html`, a made-up local event page with one `aria-hidden` instruction planted in it.
+
 **Docs**
 - A Responsible use section in the README: scan pages you read or own, CloakScan reports and never edits or blocks, findings can be false positives and ADR-003 lists what it misses, and an exported file quotes the page, so treat it like the page. *Charter and upkeep*
 - `docs/README.md` records that CloakScan has no architecture diagram, by choice: the detector flow is simple.
@@ -25,6 +28,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 **Security**
 - The popup keeps less page text between opens. Each scan stores only the page address, the scan time and each finding's type with its first 60 characters, no visible page text, in `chrome.storage.session` instead of `chrome.storage.local`: held in memory, never on disk, cleared when Chrome quits. The popup shows the record again only on the tab and page it came from and drops it when opened anywhere else, so a closed tab's scan goes at the next popup open. A reopened popup can't copy until you scan again. `PRIVACY.md`, `SECURITY.md` and the store kit's storage justification say so; `tests/storage.test.js` checks what is stored and when it is dropped. *Charter and upkeep*
+- `minimatch` 11.0.1 or later through an npm `overrides` entry, which clears Dependabot #1 (GHSA-g3hv-75wg-m249). It is a dev-only dependency of ESLint, so the extension never shipped it; lint and tests pass on it (security sweep, 2026-11-17).
 - The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
 
 **Changed**
