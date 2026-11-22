@@ -69,6 +69,19 @@ background script, and nothing leaves your browser.
 | **HTML comments** | Comments with the same instruction phrasing |
 | **Zero-width characters** | U+200B, U+200C, U+200D, U+FEFF or U+2060 inside ordinary text |
 
+## ⚖️ Responsible use
+
+- **Scan pages you're reading or own.** CloakScan is for checking what a page hands you or
+  your agent, and for auditing your own site before someone else does.
+- **It reports, and nothing more.** It never edits the page, blocks it, or stops an agent.
+  The outlines it draws go away when you reload.
+- **A finding is a lead, not a verdict.** Hidden text has honest uses: screen-reader labels,
+  collapsed menus, tracking comments. And some hidden instructions get past it on purpose
+  ([ADR-003's known misses](docs/decisions/adr-003-instruction-phrasing.md#what-it-knowingly-misses)),
+  so a clean scan doesn't prove a page is safe.
+- **An exported file carries the page's text.** Each finding in **Export findings (JSON)**
+  quotes the hidden text and the page URL. Share or store it the way you would the page itself.
+
 ## 🚀 Quick start
 
 ```bash
@@ -94,7 +107,7 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 |:---|:---|
 | [**🧰 src/**](src/README.md) | The extension and the demo page. |
 | [**📚 docs/**](docs/README.md) | The roadmap, the changelog, the product spec and build plan, and the Chrome Web Store kit. |
-| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. `store-kit.test.js` checks the store kit's summary matches the manifest, every permission has a justification, and the screenshots are 1280x800. `export.test.js` validates the Export findings file, from a fixture scan and from the demo's download, against the vendored suite schema. |
+| [**🧪 tests/**](tests/manifest.test.js) | Tests for `node --test`. `detection.test.js` loads `fixtures/hidden-text.html` in headless Chromium through Playwright, injects `content.js`, and checks all six techniques come back and nothing else does, that copy-visible-only text holds none of them, and that a clean 5,000-node page scans in under 2 seconds with no findings. `manifest.test.js` holds the permission list to `activeTab`, `scripting` and `storage` and fails on any network call under `src/extension/`. `package.test.js` runs the build and checks the store zip holds exactly the extension's files, `manifest.json` at its root. `store-kit.test.js` checks the store kit's summary matches the manifest, every permission has a justification, and the screenshots are 1280x800. `export.test.js` validates the Export findings file, from a fixture scan and from the demo's download, against the vendored suite schema. `storage.test.js` checks a scan keeps only capped snippets, tied to its tab, and no page text. |
 | [**📐 schemas/**](schemas/agent-inventory/v0.1.json) | The Agent Security Suite inventory schema v0.1, vendored unedited from `https://ai-automation-tools.dev/schemas/agent-inventory/v0.1.json`. The export follows it. |
 | [**⚙️ .github/workflows/**](.github/workflows/ci.yml) | CI: `npm ci`, lint, the tests (headless Chromium included) and the build, on every PR and every push to `main`. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |

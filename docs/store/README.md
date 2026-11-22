@@ -118,7 +118,7 @@ Used to run the scanning script in the current tab with chrome.scripting.execute
 #### storage
 
 ```text
-Keeps the result of the last scan (the findings, the page's visible text and the scan time) in chrome.storage.local, so the popup can show it again when reopened. It stays on the device, and the next scan replaces it.
+Keeps a short record of the last scan (the page address, the scan time, and each finding's type with the first 60 characters of its hidden text) in chrome.storage.session, so the popup can show it again when reopened on the same tab. It is held in memory on the device, never sent anywhere, dropped when the popup opens on another tab or page, and cleared when Chrome quits.
 ```
 
 ### Remote code
