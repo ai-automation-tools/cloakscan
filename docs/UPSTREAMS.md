@@ -18,7 +18,7 @@ source. `—` means never checked.
 | **Chrome Manifest V3** | `manifest_version: 3`; `action.default_popup`; `permissions` of exactly `activeTab`, `scripting`, `storage`; no `host_permissions`, `content_scripts` or `background` | `src/extension/manifest.json`, `scripts/build.js`, `tests/manifest.test.js` | developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3; developer.chrome.com/docs/extensions/reference/manifest | 2026-10-30 |
 | **`chrome.scripting.executeScript`** | Injects `content.js` into the active tab, an IIFE whose return value comes back in `result` | `src/extension/popup.js`, `src/extension/content.js`, `tests/detection.test.js` | developer.chrome.com/docs/extensions/reference/api/scripting | 2026-10-30 |
 | **`activeTab` permission** | A click on the toolbar icon grants temporary access to the current tab, enough for `executeScript` with no host permission | `src/extension/manifest.json`, `src/extension/popup.js` | developer.chrome.com/docs/extensions/develop/concepts/activeTab | 2026-10-30 |
-| **`chrome.tabs.query` / `chrome.storage.local`** | `tabs.query({ active: true, currentWindow: true })` needs no `tabs` permission for the id; `storage.local` `get`/`set` keeps the last scan | `src/extension/popup.js` | developer.chrome.com/docs/extensions/reference/api/tabs; developer.chrome.com/docs/extensions/reference/api/storage | 2026-10-30 |
+| **`chrome.tabs.query` / `chrome.storage.session`** | `tabs.query({ active: true, currentWindow: true })` needs no `tabs` permission for the id, and `activeTab` exposes the tab's `url`; `storage.session` (in memory, readable from the popup by default) `get`/`set`/`remove` keeps a capped record of the last scan | `src/extension/popup.js` | developer.chrome.com/docs/extensions/reference/api/tabs; developer.chrome.com/docs/extensions/reference/api/storage | 2026-10-30 |
 | **Chrome Web Store policies** | The store package is on the roadmap; `PRIVACY.md` says nothing is collected or sent, and the listing will link it | `PRIVACY.md`, `docs/ROADMAP.md` | developer.chrome.com/docs/webstore/program-policies | 2026-10-30 |
 
 ## Test and build tooling
@@ -33,8 +33,8 @@ source. `—` means never checked.
 
 | Upstream | What the code assumes | Code | Check at | Last checked |
 |:---|:---|:---|:---|:---|
-| **GitHub Pages (workflow deploys)** | `actions/configure-pages@v5`, `actions/upload-pages-artifact@v3` and `actions/deploy-pages@v4` publish `src/` as it sits; custom domain `cloakscan-demo.ai-automation-tools.dev` | `.github/workflows/pages.yml` | github.com/actions/deploy-pages/releases; docs.github.com/en/pages | 2026-10-30 |
-| **GitHub Actions** | `actions/checkout@v4`, `actions/setup-node@v4` on `ubuntu-latest` | `.github/workflows/ci.yml`, `.github/workflows/pages.yml` | github.com/actions/setup-node/releases; github.com/actions/checkout/releases | 2026-10-30 |
+| **GitHub Pages (workflow deploys)** | `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` publish `src/` as it sits; custom domain `cloakscan-demo.ai-automation-tools.dev` | `.github/workflows/pages.yml` | github.com/actions/deploy-pages/releases; docs.github.com/en/pages | 2026-11-17 |
+| **GitHub Actions** | `actions/checkout@v7`, `actions/setup-node@v7` on `ubuntu-latest` | `.github/workflows/ci.yml`, `.github/workflows/pages.yml` | github.com/actions/setup-node/releases; github.com/actions/checkout/releases | 2026-11-17 |
 
 Flag breaking majors, EOL runtimes, and security advisories only. Routine bumps are
 Dependabot's job.

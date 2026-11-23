@@ -1,6 +1,6 @@
 # Privacy policy
 
-CloakScan, a Chrome extension published by ai-automation-tools. Last updated 2026-11-10.
+CloakScan, a Chrome extension published by ai-automation-tools. Last updated 2026-11-17.
 
 ## What it collects
 
@@ -16,10 +16,12 @@ own.
 
 ## What it stores
 
-The result of the last scan (the findings, the page's visible text, and the time of the
-scan) in `chrome.storage.local`, so the popup can show it again when you reopen it. That
-storage stays on your device. The next scan replaces it, and removing the extension
-deletes it.
+A short record of the last scan, so the popup can show it again when you reopen it on the
+same tab: the page's address, the time of the scan, and each finding's type with the first
+60 characters of its hidden text. It keeps none of the page's visible text; to copy that
+again, scan again. The record sits in `chrome.storage.session`, which Chrome holds in memory
+and never writes to disk. Opening the popup on any other tab or page drops it, the next scan
+replaces it, and quitting Chrome or removing the extension deletes it.
 
 ## What it sends anywhere
 
