@@ -19,6 +19,16 @@ test("demo carries the org source bar first, linking the repo", () => {
   assert.match(body, /<a class="src-link" href="https:\/\/github\.com\/ai-automation-tools\/cloakscan"/);
 });
 
+test("demo carries a build stamp the Pages deploy fills with the commit SHA", () => {
+  const head = html.slice(0, html.indexOf("</head>"));
+  assert.match(head, /<meta name="build" content="__BUILD_SHA__" \/>/);
+  const pages = readFileSync(".github/workflows/pages.yml", "utf8");
+  assert.match(pages, /sed -i "s\/__BUILD_SHA__\/\$\{\{ github\.sha \}\}\/" src\/index\.html/);
+  // The surface drift check reads the stamp with this pattern; a 40-hex SHA must satisfy it.
+  const stamped = head.replace("__BUILD_SHA__", "0123456789abcdef0123456789abcdef01234567");
+  assert.match(stamped, /<meta[^>]+name="build"[^>]+content="([0-9a-f]{7,40})"/i);
+});
+
 test("demo theme switch is a Light then Dark button pair", () => {
   const group = html.match(/<div class="theme-toggle" role="group" aria-label="Theme">([\s\S]*?)<\/div>/);
   assert.ok(group, "theme switch group exists");

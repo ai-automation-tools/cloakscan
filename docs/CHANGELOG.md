@@ -16,6 +16,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 ## Unreleased
 
 **Added**
+- The demo carries a build stamp: `src/index.html` holds `<meta name="build" content="__BUILD_SHA__" />`, and the Pages workflow replaces the placeholder with the commit SHA before upload, so a stale deploy can be told from a current one. Opened from `file://` the page keeps the placeholder. `tests/demo-theme.test.js` checks the tag and the workflow step.
 - Example page `src/examples/millrace-repair-cafe.html`, a made-up local event page with one `aria-hidden` instruction planted in it.
 
 **Docs**
@@ -28,11 +29,11 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 **Security**
 - The popup keeps less page text between opens. Each scan stores only the page address, the scan time and each finding's type with its first 60 characters, no visible page text, in `chrome.storage.session` instead of `chrome.storage.local`: held in memory, never on disk, cleared when Chrome quits. The popup shows the record again only on the tab and page it came from and drops it when opened anywhere else, so a closed tab's scan goes at the next popup open. A reopened popup can't copy until you scan again. `PRIVACY.md`, `SECURITY.md` and the store kit's storage justification say so; `tests/storage.test.js` checks what is stored and when it is dropped. *Charter and upkeep*
-- `minimatch` 11.0.1 or later through an npm `overrides` entry, which clears Dependabot #1 (GHSA-g3hv-75wg-m249). It is a dev-only dependency of ESLint, so the extension never shipped it; lint and tests pass on it (security sweep, 2026-11-17).
+- `minimatch` 11.0.1 or later through an npm `overrides` entry, which clears Dependabot #1 (GHSA-g3hv-75wg-m249). It is a dev-only dependency of ESLint, so the extension never shipped it; lint and tests pass on it (security sweep, 2026-11-17). *Charter and upkeep*
 - The popup escapes the finding label as well as the snippet before it goes into `innerHTML` (security sweep, 2026-10-26). Not reachable from a page today; defense in depth.
 
 **Changed**
-- The workflows use the current Actions majors: `actions/checkout@v7` and `actions/setup-node@v7` in CI and Pages, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` in Pages. No inputs changed. `docs/UPSTREAMS.md` lists the new versions.
+- The workflows use the current Actions majors: `actions/checkout@v7` and `actions/setup-node@v7` in CI and Pages, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` in Pages. No inputs changed. `docs/UPSTREAMS.md` lists the new versions. *Charter and upkeep*
 - ESLint 10: `eslint` `^10.14.0` and `@eslint/js` `^10.0.1`. Its new `no-useless-assignment` rule removed a dead `ok = false` in `popup.js`. `engines.node` is now `>=22.13`, ESLint 10's floor. *Upkeep*
 - `docs/UPSTREAMS.md` rows checked 2026-10-30; the Playwright and `globals` versions it states now match `package.json`. Two upkeep items queued on the roadmap: the Actions majors and ESLint 10.
 - The README links the demo at its own host, `https://cloakscan-demo.ai-automation-tools.dev/`, set at graduation; the old `ai-automation-tools.dev/cloakscan/` address redirects there.

@@ -33,7 +33,7 @@ source. `—` means never checked.
 
 | Upstream | What the code assumes | Code | Check at | Last checked |
 |:---|:---|:---|:---|:---|
-| **GitHub Pages (workflow deploys)** | `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` publish `src/` as it sits; custom domain `cloakscan-demo.ai-automation-tools.dev` | `.github/workflows/pages.yml` | github.com/actions/deploy-pages/releases; docs.github.com/en/pages | 2026-11-17 |
+| **GitHub Pages (workflow deploys)** | `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5` and `actions/deploy-pages@v5` publish `src/` as it sits, bar the build stamp's SHA; custom domain `cloakscan-demo.ai-automation-tools.dev` | `.github/workflows/pages.yml` | github.com/actions/deploy-pages/releases; docs.github.com/en/pages | 2026-11-17 |
 | **GitHub Actions** | `actions/checkout@v7`, `actions/setup-node@v7` on `ubuntu-latest` | `.github/workflows/ci.yml`, `.github/workflows/pages.yml` | github.com/actions/setup-node/releases; github.com/actions/checkout/releases | 2026-11-17 |
 
 Flag breaking majors, EOL runtimes, and security advisories only. Routine bumps are
