@@ -20,6 +20,7 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 - Example page `src/examples/millrace-repair-cafe.html`, a made-up local event page with one `aria-hidden` instruction planted in it.
 
 **Docs**
+- Roadmap refresh: a new Charter and upkeep item, **Flag instructions hidden in attributes**, a seventh detector for `data-*`, `title`, `alt` and `<meta>` values that read as instructions. Why now: Unit 42's in-the-wild catalogue (2026-03-03) puts attribute cloaking at 19.8% of web prompt injections, second only to plain text, and a study revised 2026-11-04 finds about 70% hide in non-rendered HTML; CloakScan reads no attributes yet.
 - A Responsible use section in the README: scan pages you read or own, CloakScan reports and never edits or blocks, findings can be false positives and ADR-003 lists what it misses, and an exported file quotes the page, so treat it like the page. *Charter and upkeep*
 - `docs/README.md` records that CloakScan has no architecture diagram, by choice: the detector flow is simple.
 - Roadmap rechecked against the org's 2026-11 requirements. The intro names the routine instead of its days and the badges say public. The Upkeep group becomes Charter and upkeep: Responsible use first, the Actions-majors move (now workable by the routine, its PR still held for review), clearing Dependabot #1, and keeping less page text in storage.
