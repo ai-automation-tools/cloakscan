@@ -113,7 +113,7 @@ CloakScan icon in the mock toolbar, then **Scan this page**.
 | [**🛠️ skills/**](skills/cloakscan/SKILL.md) | An agent skill for driving CloakScan from any repo: install from source, run the detector against a page in headless Chromium, and read the findings and the export file. |
 | [**🔒 SECURITY.md**](SECURITY.md) | How to report a vulnerability privately. |
 | [**🛡️ PRIVACY.md**](PRIVACY.md) | The privacy policy: nothing collected, the last scan kept on the device, nothing sent. The Chrome Web Store listing will link it. |
-| [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. `CLAUDE.md` imports it for Claude Code. |
+| [**🤖 AGENTS.md**](AGENTS.md) | Standing orders for the agent that works the roadmap each week. Claude Code reads it directly too. |
 
 ## 🔗 Related repositories
 
