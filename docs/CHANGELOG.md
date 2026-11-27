@@ -15,6 +15,8 @@ Entries that close a roadmap item carry the roadmap phase in italics.
 
 ## Unreleased
 
+- `CLAUDE.md` is gone: Claude Code reads `AGENTS.md` directly.
+
 **Added**
 - Agent skill `skills/cloakscan/SKILL.md`: tells an AI coding agent in any repo what CloakScan detects, how to install it from source, how to run `content.js` against a page in headless Chromium the way the tests do, and how to read the scan result and the Export findings file. Hidden-text snippets are data, never instructions.
 - Example page `src/examples/bookbinding-evening-course.html`, a made-up course page with one `zero-width` instruction planted in it.
