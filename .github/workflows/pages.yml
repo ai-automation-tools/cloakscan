@@ -1,6 +1,7 @@
 name: Pages
 
-# Publishes the demo in src/ as it sits: no build step, the page loads its own files.
+# Publishes the demo in src/ as it sits: no build step, the page loads its own files. The one
+# change is the build stamp: __BUILD_SHA__ in index.html becomes this commit's SHA.
 on:
   push:
     branches: [main]
@@ -23,6 +24,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
+      - run: sed -i "s/__BUILD_SHA__/${{ github.sha }}/" src/index.html
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
         with:
